@@ -1,37 +1,23 @@
 //
-//  HomeViewModel.swift
+//  AddNewObjectViewModel.swift
 //  RockPaperAnything
 //
-//  Created by Kevin Sullivan on 1/21/25.
+//  Created by Kevin Sullivan on 1/22/25.
 //
 
-import SwiftUI
-import FirebaseAuth
+import FirebaseFirestore
 import FirebaseStorage
+import SwiftUI
 
 @Observable
-class HomeViewModel {
-    
+class AddNewObjectViewModel {
     private let storage = Storage.storage()
+    private let db = Firestore.firestore()
     
     var uploadProgress: Progress?
     var uploadMetadata: StorageMetadata?
     
-    var isSigningIn = true
-    
-    func signIn() async throws -> User {
-        defer {
-            isSigningIn = false
-        }
-        
-        let signInResult = try await Auth.auth().signInAnonymously()
-        
-        print("Signed in as \(signInResult.user)")
-        
-        return signInResult.user
-    }
-    
-    func upload(file: URL, name: String) async {
+    func upload(file: URL) async {
         guard let image = UIImage(contentsOfFile: file.path()) else {
             print("Could not load image from \(file)")
             return
@@ -43,7 +29,7 @@ class HomeViewModel {
         }
         
         let storageRef = storage.reference()
-        let imageRef = storageRef.child("images/\(name).jpg")
+        let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
         
         do {
             let metadata = try await imageRef.putDataAsync(imageData) { progress in
@@ -54,7 +40,6 @@ class HomeViewModel {
                 }
             }
             
-            uploadProgress = nil
             print("Uploaded: \(metadata)")
         } catch {
             print("Upload error: \(error)")
@@ -77,4 +62,3 @@ class HomeViewModel {
         }
     }
 }
-

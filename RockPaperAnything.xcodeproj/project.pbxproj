@@ -22,12 +22,14 @@
 		0A6F42772D408D88004261E5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42762D408D88004261E5 /* FirebaseCrashlytics */; };
 		0A6F42792D408D88004261E5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42782D408D88004261E5 /* FirebaseDatabase */; };
 		0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F427A2D408D88004261E5 /* FirebaseStorage */; };
-		0A6F427D2D4091F6004261E5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F427C2D4091F6004261E5 /* HomeViewModel.swift */; };
 		0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F427E2D40936E004261E5 /* FirebaseAuth */; };
-		0A6F42832D40E8D2004261E5 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42822D40E8D2004261E5 /* SignInView.swift */; };
+		0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42822D40E8D2004261E5 /* LoginView.swift */; };
 		0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */; };
 		0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42872D40F7EF004261E5 /* User+Observable.swift */; };
 		0A6F428F2D410043004261E5 /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F428E2D410043004261E5 /* GameKitUI */; };
+		0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42902D414309004261E5 /* LoginHeaderView.swift */; };
+		0A6F42932D41929D004261E5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42922D41929D004261E5 /* FirebaseFirestore */; };
+		0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,11 +61,12 @@
 		0A6F42692D408D55004261E5 /* RockPaperAnythingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingTests.swift; sourceTree = "<group>"; };
 		0A6F426C2D408D57004261E5 /* RockPaperAnythingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingUITests.swift; sourceTree = "<group>"; };
 		0A6F426D2D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0A6F427C2D4091F6004261E5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		0A6F42822D40E8D2004261E5 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		0A6F42822D40E8D2004261E5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewModel.swift; sourceTree = "<group>"; };
 		0A6F42872D40F7EF004261E5 /* User+Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Observable.swift"; sourceTree = "<group>"; };
 		0A6F42892D40FC5A004261E5 /* RockPaperAnything.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RockPaperAnything.entitlements; sourceTree = "<group>"; };
+		0A6F42902D414309004261E5 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
+		0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,7 @@
 				0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */,
 				0A6F42752D408D88004261E5 /* FirebaseCore in Frameworks */,
 				0A6F42792D408D88004261E5 /* FirebaseDatabase in Frameworks */,
+				0A6F42932D41929D004261E5 /* FirebaseFirestore in Frameworks */,
 				0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */,
 				0A6F42732D408D88004261E5 /* FirebaseAnalytics in Frameworks */,
 			);
@@ -161,8 +165,9 @@
 		0A6F42802D409715004261E5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0A6F42822D40E8D2004261E5 /* SignInView.swift */,
+				0A6F42822D40E8D2004261E5 /* LoginView.swift */,
 				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
+				0A6F42902D414309004261E5 /* LoginHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,7 +175,7 @@
 		0A6F42812D40971B004261E5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0A6F427C2D4091F6004261E5 /* HomeViewModel.swift */,
+				0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */,
 				0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */,
 			);
 			path = ViewModel;
@@ -208,6 +213,7 @@
 				0A6F427A2D408D88004261E5 /* FirebaseStorage */,
 				0A6F427E2D40936E004261E5 /* FirebaseAuth */,
 				0A6F428E2D410043004261E5 /* GameKitUI */,
+				0A6F42922D41929D004261E5 /* FirebaseFirestore */,
 			);
 			productName = RockPaperAnything;
 			productReference = 0A6F42282D4089C6004261E5 /* RockPaperAnything.app */;
@@ -338,9 +344,10 @@
 				0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */,
 				0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */,
 				0A6F42662D408D4A004261E5 /* RockPaperAnythingApp.swift in Sources */,
-				0A6F42832D40E8D2004261E5 /* SignInView.swift in Sources */,
-				0A6F427D2D4091F6004261E5 /* HomeViewModel.swift in Sources */,
+				0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */,
+				0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */,
 				0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */,
+				0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +734,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A6F428D2D410043004261E5 /* XCRemoteSwiftPackageReference "GameKitUI.swift" */;
 			productName = GameKitUI;
+		};
+		0A6F42922D41929D004261E5 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

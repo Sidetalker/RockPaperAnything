@@ -11,7 +11,6 @@ import ImagePlayground
 
 struct HomeView: View {
     @EnvironmentObject var user: User
-    @State var viewModel = HomeViewModel()
     
     var body: some View {
         TabView {
@@ -46,7 +45,7 @@ struct ObjectsView: View {
                 }
             }
         }.fullScreenCover(isPresented: $isAddingItem) {
-            AddNewObjectView(viewModel: $viewModel)
+            AddNewObjectView()
         }
     }
 }
@@ -55,13 +54,17 @@ struct AddNewObjectView: View {
     @EnvironmentObject var user: ObservableUser
     @Environment(\.dismiss) var dismiss
     
-    @Binding var viewModel: ObjectViewModel
+    @State var viewModel = AddNewObjectViewModel()
     
     @FocusState private var promptIsFocused: Bool
     @State private var isImagePlaygroundPresented = false
     @State private var prompt = ""
     @State private var name = ""
     @State private var imageUrl: URL?
+    
+    private var isUploading: Bool {
+        (viewModel.uploadProgress?.fractionCompleted ?? 1) < 1
+    }
     
     var body: some View {
         NavigationView {
@@ -93,16 +96,18 @@ struct AddNewObjectView: View {
                                 .multilineTextAlignment(.center)
                         }
                     }
-                    .brightness(viewModel.uploadProgress == nil ? 0 : -0.5)
+                    .brightness(isUploading ? -0.5 : 0)
                     .frame(width: 250)
                     
-                    if let progress = viewModel.uploadProgress?.fractionCompleted {
+                    if
+                        let progress = viewModel.uploadProgress?.fractionCompleted,
+                        isUploading
+                    {
                         ProgressView(value: progress) {
                             Text("Uploading")
                         } currentValueLabel: {
                             Text("\(Int(progress * 100))%")
                         }
-                        .progressViewStyle(.circular)
                     }
                 }
                 TextField(
@@ -117,20 +122,19 @@ struct AddNewObjectView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 30)
-                TextField(
-                    "Object Name",
-                    text: $name
-                )
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 50)
-                Spacer().frame(height: 30)
-                if let imageUrl {
+                if let imageUrl, !(viewModel.uploadProgress?.isFinished ?? false) {
                     Button(action: {
                         Task {
-                            await viewModel.upload(file: imageUrl, name: name)
+                            await viewModel.upload(file: imageUrl)
                         }
                     }) {
-                        Label("Add Folder", systemImage: "folder.badge.plus")
+                        Label("Upload Image", systemImage: "icloud.and.arrow.up")
+                    }
+                } else if let imageUrl {
+                    Button(action: {
+                        return
+                    }) {
+                        Text("Continue")
                     }
                 }
                 Spacer()
@@ -141,7 +145,7 @@ struct AddNewObjectView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         Task {
-                            await viewModel.delete()
+//                            await viewModel.delete()
                             dismiss()
                         }
                     }.tint(.red)
@@ -159,8 +163,7 @@ struct AddNewObjectView: View {
 }
 
 #Preview("Add New") {
-    @Previewable @State var viewModel = ObjectViewModel()
-    AddNewObjectView(viewModel: $viewModel)
+    AddNewObjectView()
 }
 
 #Preview("Objects List") {

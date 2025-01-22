@@ -28,7 +28,7 @@ struct RockPaperAnythingApp: App {
                 HomeView()
                     .environmentObject(user)
             } else {
-                SignInView(user: user)
+                LoginView(user: user)
             }
         }
     }
