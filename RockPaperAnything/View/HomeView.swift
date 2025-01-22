@@ -6,6 +6,8 @@
 //
 
 import FirebaseAuth
+import FirebaseStorage
+import NukeUI
 import SwiftUI
 import ImagePlayground
 
@@ -28,15 +30,12 @@ struct ObjectsView: View {
     
     @State private var isImagePlaygroundPresented = false
     @State private var prompt = ""
-    @State private var imageUrl: URL?
     @State private var isAddingItem = false
     
     var body: some View {
         NavigationView {
-            List {
-                Text("test1")
-                Text("test2")
-                Text("test3")
+            List(viewModel.objects) {
+                ObjectCell(object: $0)
             }
             .navigationTitle("Objects")
             .toolbar {
@@ -46,6 +45,42 @@ struct ObjectsView: View {
             }
         }.fullScreenCover(isPresented: $isAddingItem) {
             AddNewObjectView()
+        }.onAppear {
+            viewModel.startListening()
+        }
+    }
+}
+
+struct ObjectCell: View {
+    var object: Object
+    @State var imageUrl: URL?
+    
+    var body: some View {
+        HStack {
+            LazyImage(url: imageUrl) { state in
+                if let image = state.image {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(Circle())
+                        .frame(width: 50, height: 50)
+                } else if state.error != nil {
+                    Image(systemName: "exclamationmark.icloud")
+                } else {
+                    ProgressView()
+                        .frame(width: 50, height: 50)
+                }
+            }
+            Text(object.name).padding(10)
+        }.task {
+            let storage = Storage.storage()
+            let storageRef = storage.reference(withPath: object.imagePath)
+            
+            do {
+                imageUrl = try await storageRef.downloadURL()
+            } catch {
+                print("Error getting URL: \(error)")
+            }
         }
     }
 }
@@ -122,6 +157,7 @@ struct AddNewObjectView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 50)
                 .padding(.vertical, 30)
+                
                 if let imageUrl, !(viewModel.uploadProgress?.isFinished ?? false) {
                     Button(action: {
                         Task {
@@ -130,7 +166,7 @@ struct AddNewObjectView: View {
                     }) {
                         Label("Upload Image", systemImage: "icloud.and.arrow.up")
                     }
-                } else if let imageUrl {
+                } else if imageUrl != nil {
                     Button(action: {
                         return
                     }) {
@@ -167,5 +203,11 @@ struct AddNewObjectView: View {
 }
 
 #Preview("Objects List") {
-    ObjectsView()
+    @Previewable @State var viewModel: ObjectViewModel = {
+        let vm = ObjectViewModel()
+        vm.objects = [Object.placeholder]
+        return vm
+    }()
+    
+    ObjectsView(viewModel: viewModel)
 }
