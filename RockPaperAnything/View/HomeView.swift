@@ -5,91 +5,164 @@
 //  Created by Kevin Sullivan on 1/21/25.
 //
 
+import FirebaseAuth
 import SwiftUI
 import ImagePlayground
 
 struct HomeView: View {
+    @EnvironmentObject var user: User
     @State var viewModel = HomeViewModel()
     
     var body: some View {
-        if viewModel.isSigningIn {
-            ProgressView {
-                Text("Signing In")
-            }.task {
-                await viewModel.signIn()
-            }
-        } else {
-            TabView {
-                ObjectsView(viewModel: $viewModel)
-                    .tabItem {
-                        Label("Objects", systemImage: "list.bullet")
-                    }
-            }
+        TabView {
+            ObjectsView()
+                .tabItem {
+                    Label("Objects", systemImage: "list.bullet")
+                }
         }
     }
 }
 
 struct ObjectsView: View {
-    @Binding var viewModel: HomeViewModel
+    @EnvironmentObject var user: User
+    @State var viewModel = ObjectViewModel()
     
-    @State var isImagePlaygroundPresented = false
-    @State var prompt = ""
-    @State var imageUrl: URL?
+    @State private var isImagePlaygroundPresented = false
+    @State private var prompt = ""
+    @State private var imageUrl: URL?
+    @State private var isAddingItem = false
     
     var body: some View {
-        VStack {
-            ZStack {
-                AsyncImage(
-                    url: imageUrl,
-                    transaction: Transaction(animation: .easeInOut)
-                ) { phase in
-                    switch phase {
-                    case .empty:
-                        Text("Create your image")
-                            .multilineTextAlignment(.center)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    case .failure:
-                        Image(systemName: "wifi.slash")
-                    default:
-                        Text("Unknown phase")
-                            .multilineTextAlignment(.center)
-                    }
-                }
-                .brightness(viewModel.uploadProgress == nil ? 0 : -0.5)
-                .frame(width: 250)
-                
-                if let progress = viewModel.uploadProgress?.fractionCompleted {
-                    ProgressView(value: progress) {
-                        Text("Uploading")
-                    } currentValueLabel: {
-                        Text("\(Int(progress * 100))%")
-                    }
-                    .progressViewStyle(.circular)
+        NavigationView {
+            List {
+                Text("test1")
+                Text("test2")
+                Text("test3")
+            }
+            .navigationTitle("Objects")
+            .toolbar {
+                Button("", systemImage: "plus") {
+                    isAddingItem = true
                 }
             }
-            TextField(
-                "Image Prompt",
-                text: $prompt
-            ).onSubmit {
-                isImagePlaygroundPresented.toggle()
-            }
-            .padding(50)
-        }
-        .imagePlaygroundSheet(
-            isPresented: $isImagePlaygroundPresented,
-            concept: prompt
-        ) { url in
-            imageUrl = url
-            Task {
-                await viewModel.upload(file: url, name: prompt)
-            }
+        }.fullScreenCover(isPresented: $isAddingItem) {
+            AddNewObjectView(viewModel: $viewModel)
         }
     }
 }
 
-#Preview {
-    HomeView()
+struct AddNewObjectView: View {
+    @EnvironmentObject var user: ObservableUser
+    @Environment(\.dismiss) var dismiss
+    
+    @Binding var viewModel: ObjectViewModel
+    
+    @FocusState private var promptIsFocused: Bool
+    @State private var isImagePlaygroundPresented = false
+    @State private var prompt = ""
+    @State private var name = ""
+    @State private var imageUrl: URL?
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("Step 1: Generate Your Image")
+                    .bold()
+                    .dynamicTypeSize(.large)
+                Spacer().frame(height: 30)
+                ZStack {
+                    AsyncImage(
+                        url: imageUrl,
+                        transaction: Transaction(animation: .easeInOut)
+                    ) { phase in
+                        switch phase {
+                        case .empty:
+                            Image(systemName: "photo.fill")
+                                .font(.system(size: 50, weight: .ultraLight))
+                                .imageScale(.large)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        case .failure:
+                            Image(systemName: "wifi.slash")
+                                .font(.system(size: 50, weight: .ultraLight))
+                                .imageScale(.large)
+                        default:
+                            Text("Unknown phase")
+                                .multilineTextAlignment(.center)
+                        }
+                    }
+                    .brightness(viewModel.uploadProgress == nil ? 0 : -0.5)
+                    .frame(width: 250)
+                    
+                    if let progress = viewModel.uploadProgress?.fractionCompleted {
+                        ProgressView(value: progress) {
+                            Text("Uploading")
+                        } currentValueLabel: {
+                            Text("\(Int(progress * 100))%")
+                        }
+                        .progressViewStyle(.circular)
+                    }
+                }
+                TextField(
+                    "Image Prompt",
+                    text: $prompt
+                ).onSubmit {
+                    name = prompt
+                    isImagePlaygroundPresented.toggle()
+                }
+                .focused($promptIsFocused)
+                .submitLabel(.search)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 50)
+                .padding(.vertical, 30)
+                TextField(
+                    "Object Name",
+                    text: $name
+                )
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 50)
+                Spacer().frame(height: 30)
+                if let imageUrl {
+                    Button(action: {
+                        Task {
+                            await viewModel.upload(file: imageUrl, name: name)
+                        }
+                    }) {
+                        Label("Add Folder", systemImage: "folder.badge.plus")
+                    }
+                }
+                Spacer()
+            }
+            .navigationTitle("Create New Object")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        Task {
+                            await viewModel.delete()
+                            dismiss()
+                        }
+                    }.tint(.red)
+                }
+            }
+        }.onAppear {
+            promptIsFocused = true
+        }.imagePlaygroundSheet(
+            isPresented: $isImagePlaygroundPresented,
+            concept: prompt
+        ) { url in
+            imageUrl = url
+        }
+    }
+}
+
+#Preview("Add New") {
+    @Previewable @State var viewModel = ObjectViewModel()
+    AddNewObjectView(viewModel: $viewModel)
+}
+
+#Preview("Objects List") {
+    ObjectsView()
 }

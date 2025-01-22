@@ -1,35 +1,19 @@
 //
-//  HomeViewModel.swift
+//  ObjectViewModel.swift
 //  RockPaperAnything
 //
-//  Created by Kevin Sullivan on 1/21/25.
+//  Created by Kevin Sullivan on 1/22/25.
 //
 
-import SwiftUI
-import FirebaseAuth
 import FirebaseStorage
+import SwiftUI
 
 @Observable
-class HomeViewModel {
-    
+class ObjectViewModel {
     private let storage = Storage.storage()
     
     var uploadProgress: Progress?
     var uploadMetadata: StorageMetadata?
-    
-    var isSigningIn = true
-    
-    func signIn() async throws -> User {
-        defer {
-            isSigningIn = false
-        }
-        
-        let signInResult = try await Auth.auth().signInAnonymously()
-        
-        print("Signed in as \(signInResult.user)")
-        
-        return signInResult.user
-    }
     
     func upload(file: URL, name: String) async {
         guard let image = UIImage(contentsOfFile: file.path()) else {
@@ -77,4 +61,3 @@ class HomeViewModel {
         }
     }
 }
-
