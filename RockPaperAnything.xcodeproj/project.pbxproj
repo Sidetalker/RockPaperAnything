@@ -6,6 +6,26 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0A6F42622D408D4A004261E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425B2D408D4A004261E5 /* Preview Assets.xcassets */; };
+		0A6F42632D408D4A004261E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425D2D408D4A004261E5 /* Assets.xcassets */; };
+		0A6F42642D408D4A004261E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */; };
+		0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F425E2D408D4A004261E5 /* HomeView.swift */; };
+		0A6F42662D408D4A004261E5 /* RockPaperAnythingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42602D408D4A004261E5 /* RockPaperAnythingApp.swift */; };
+		0A6F42672D408D4A004261E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */; };
+		0A6F42682D408D4A004261E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */; };
+		0A6F426B2D408D55004261E5 /* RockPaperAnythingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42692D408D55004261E5 /* RockPaperAnythingTests.swift */; };
+		0A6F426F2D408D57004261E5 /* RockPaperAnythingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F426C2D408D57004261E5 /* RockPaperAnythingUITests.swift */; };
+		0A6F42702D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F426D2D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift */; };
+		0A6F42732D408D88004261E5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42722D408D88004261E5 /* FirebaseAnalytics */; };
+		0A6F42752D408D88004261E5 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42742D408D88004261E5 /* FirebaseCore */; };
+		0A6F42772D408D88004261E5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42762D408D88004261E5 /* FirebaseCrashlytics */; };
+		0A6F42792D408D88004261E5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42782D408D88004261E5 /* FirebaseDatabase */; };
+		0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F427A2D408D88004261E5 /* FirebaseStorage */; };
+		0A6F427D2D4091F6004261E5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F427C2D4091F6004261E5 /* HomeViewModel.swift */; };
+		0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F427E2D40936E004261E5 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		0A6F42392D4089C7004261E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,31 +47,28 @@
 		0A6F42282D4089C6004261E5 /* RockPaperAnything.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RockPaperAnything.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F42382D4089C7004261E5 /* RockPaperAnythingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RockPaperAnythingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F42422D4089C7004261E5 /* RockPaperAnythingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RockPaperAnythingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A6F425B2D408D4A004261E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0A6F425D2D408D4A004261E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A6F425E2D408D4A004261E5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A6F42602D408D4A004261E5 /* RockPaperAnythingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingApp.swift; sourceTree = "<group>"; };
+		0A6F42692D408D55004261E5 /* RockPaperAnythingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingTests.swift; sourceTree = "<group>"; };
+		0A6F426C2D408D57004261E5 /* RockPaperAnythingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingUITests.swift; sourceTree = "<group>"; };
+		0A6F426D2D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0A6F427C2D4091F6004261E5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		0A6F422A2D4089C6004261E5 /* RockPaperAnything */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RockPaperAnything;
-			sourceTree = "<group>";
-		};
-		0A6F423B2D4089C7004261E5 /* RockPaperAnythingTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RockPaperAnythingTests;
-			sourceTree = "<group>";
-		};
-		0A6F42452D4089C7004261E5 /* RockPaperAnythingUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RockPaperAnythingUITests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		0A6F42252D4089C6004261E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F42772D408D88004261E5 /* FirebaseCrashlytics in Frameworks */,
+				0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */,
+				0A6F42752D408D88004261E5 /* FirebaseCore in Frameworks */,
+				0A6F42792D408D88004261E5 /* FirebaseDatabase in Frameworks */,
+				0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */,
+				0A6F42732D408D88004261E5 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,9 +92,9 @@
 		0A6F421F2D4089C6004261E5 = {
 			isa = PBXGroup;
 			children = (
-				0A6F422A2D4089C6004261E5 /* RockPaperAnything */,
-				0A6F423B2D4089C7004261E5 /* RockPaperAnythingTests */,
-				0A6F42452D4089C7004261E5 /* RockPaperAnythingUITests */,
+				0A6F42612D408D4A004261E5 /* RockPaperAnything */,
+				0A6F426A2D408D55004261E5 /* RockPaperAnythingTests */,
+				0A6F426E2D408D57004261E5 /* RockPaperAnythingUITests */,
 				0A6F42292D4089C6004261E5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +107,60 @@
 				0A6F42422D4089C7004261E5 /* RockPaperAnythingUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0A6F425C2D408D4A004261E5 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F425B2D408D4A004261E5 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0A6F42612D408D4A004261E5 /* RockPaperAnything */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F425C2D408D4A004261E5 /* Preview Content */,
+				0A6F425D2D408D4A004261E5 /* Assets.xcassets */,
+				0A6F42802D409715004261E5 /* View */,
+				0A6F42812D40971B004261E5 /* ViewModel */,
+				0A6F42602D408D4A004261E5 /* RockPaperAnythingApp.swift */,
+				0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */,
+			);
+			path = RockPaperAnything;
+			sourceTree = "<group>";
+		};
+		0A6F426A2D408D55004261E5 /* RockPaperAnythingTests */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F42692D408D55004261E5 /* RockPaperAnythingTests.swift */,
+			);
+			path = RockPaperAnythingTests;
+			sourceTree = "<group>";
+		};
+		0A6F426E2D408D57004261E5 /* RockPaperAnythingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F426C2D408D57004261E5 /* RockPaperAnythingUITests.swift */,
+				0A6F426D2D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift */,
+			);
+			path = RockPaperAnythingUITests;
+			sourceTree = "<group>";
+		};
+		0A6F42802D409715004261E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A6F42812D40971B004261E5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0A6F427C2D4091F6004261E5 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,11 +178,14 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				0A6F422A2D4089C6004261E5 /* RockPaperAnything */,
-			);
 			name = RockPaperAnything;
 			packageProductDependencies = (
+				0A6F42722D408D88004261E5 /* FirebaseAnalytics */,
+				0A6F42742D408D88004261E5 /* FirebaseCore */,
+				0A6F42762D408D88004261E5 /* FirebaseCrashlytics */,
+				0A6F42782D408D88004261E5 /* FirebaseDatabase */,
+				0A6F427A2D408D88004261E5 /* FirebaseStorage */,
+				0A6F427E2D40936E004261E5 /* FirebaseAuth */,
 			);
 			productName = RockPaperAnything;
 			productReference = 0A6F42282D4089C6004261E5 /* RockPaperAnything.app */;
@@ -129,9 +203,6 @@
 			);
 			dependencies = (
 				0A6F423A2D4089C7004261E5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				0A6F423B2D4089C7004261E5 /* RockPaperAnythingTests */,
 			);
 			name = RockPaperAnythingTests;
 			packageProductDependencies = (
@@ -152,9 +223,6 @@
 			);
 			dependencies = (
 				0A6F42442D4089C7004261E5 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				0A6F42452D4089C7004261E5 /* RockPaperAnythingUITests */,
 			);
 			name = RockPaperAnythingUITests;
 			packageProductDependencies = (
@@ -195,6 +263,9 @@
 			);
 			mainGroup = 0A6F421F2D4089C6004261E5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0A6F42292D4089C6004261E5 /* Products */;
 			projectDirPath = "";
@@ -212,6 +283,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F42622D408D4A004261E5 /* Preview Assets.xcassets in Resources */,
+				0A6F42632D408D4A004261E5 /* Assets.xcassets in Resources */,
+				0A6F42642D408D4A004261E5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F42672D408D4A004261E5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F42682D408D4A004261E5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +312,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */,
+				0A6F42662D408D4A004261E5 /* RockPaperAnythingApp.swift in Sources */,
+				0A6F427D2D4091F6004261E5 /* HomeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F426B2D408D55004261E5 /* RockPaperAnythingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +330,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6F426F2D408D57004261E5 /* RockPaperAnythingUITests.swift in Sources */,
+				0A6F42702D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,11 +486,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sideapps.RockPaperAnything;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -433,11 +517,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sideapps.RockPaperAnything;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -558,6 +644,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A6F42722D408D88004261E5 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0A6F42742D408D88004261E5 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		0A6F42762D408D88004261E5 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		0A6F42782D408D88004261E5 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		0A6F427A2D408D88004261E5 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		0A6F427E2D40936E004261E5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A6F42202D4089C6004261E5 /* Project object */;
 }
