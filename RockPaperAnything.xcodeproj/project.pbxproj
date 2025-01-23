@@ -32,6 +32,7 @@
 		0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */; };
 		0A6F42982D41A3EA004261E5 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42972D41A3EA004261E5 /* Nuke */; };
 		0A6F429A2D41A62F004261E5 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42992D41A62F004261E5 /* NukeUI */; };
+		0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		0A6F42892D40FC5A004261E5 /* RockPaperAnything.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RockPaperAnything.entitlements; sourceTree = "<group>"; };
 		0A6F42902D414309004261E5 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectViewModel.swift; sourceTree = "<group>"; };
+		0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			children = (
 				0A6F42822D40E8D2004261E5 /* LoginView.swift */,
 				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
+				0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */,
 				0A6F42902D414309004261E5 /* LoginHeaderView.swift */,
 			);
 			path = View;
@@ -354,6 +357,7 @@
 				0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */,
 				0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */,
 				0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */,
+				0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */,
 				0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

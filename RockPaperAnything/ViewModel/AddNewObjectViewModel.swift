@@ -5,45 +5,50 @@
 //  Created by Kevin Sullivan on 1/22/25.
 //
 
-import FirebaseFirestore
 import FirebaseStorage
 import SwiftUI
+
+enum UploadError: Error {
+    case imageLoadFail
+    case imageDataFail
+}
 
 @Observable
 class AddNewObjectViewModel {
     private let storage = Storage.storage()
-    private let db = Firestore.firestore()
     
+    var objects: [Object]
     var uploadProgress: Progress?
     var uploadMetadata: StorageMetadata?
     
-    func upload(file: URL) async {
+    init(objects: [Object]) {
+        self.objects = objects
+    }
+    
+    func upload(file: URL) async throws -> Object {
         guard let image = UIImage(contentsOfFile: file.path()) else {
             print("Could not load image from \(file)")
-            return
+            throw UploadError.imageLoadFail
         }
         
         guard let imageData = image.jpegData(compressionQuality: 1) else {
             print("Could not create JPG data from image")
-            return
+            throw UploadError.imageDataFail
         }
         
+        let imagePath = "images/\(UUID().uuidString).jpg"
         let storageRef = storage.reference()
-        let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
+        let imageRef = storageRef.child(imagePath)
         
-        do {
-            let metadata = try await imageRef.putDataAsync(imageData) { progress in
-                self.uploadProgress = progress
-                
-                if let progress {
-                    print("Upload progress: \(progress.fractionCompleted)")
-                }
-            }
+        _ = try await imageRef.putDataAsync(imageData) { progress in
+            self.uploadProgress = progress
             
-            print("Uploaded: \(metadata)")
-        } catch {
-            print("Upload error: \(error)")
+            if let progress {
+                print("Upload progress: \(progress.fractionCompleted)")
+            }
         }
+        
+        return Object(name: "", imagePath: imagePath, wins: [], loses: [], winCount: 0, timesUsed: 0)
     }
     
     func delete() async {

@@ -231,7 +231,7 @@ struct Arrow: Shape {
 }
 
 #Preview(
-    "Objects List",
+    "Login Header",
     traits: .sizeThatFitsLayout
 ) {
     LoginHeaderView()
