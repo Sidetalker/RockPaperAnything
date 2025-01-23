@@ -41,7 +41,7 @@ struct HomeView: View {
 
 struct ObjectsView: View {
     @EnvironmentObject var user: User
-    @State var viewModel = ObjectViewModel()
+    @State private var viewModel = ObjectViewModel()
     
     @State private var isImagePlaygroundPresented = false
     @State private var prompt = ""
@@ -79,11 +79,5 @@ struct ObjectCell: View {
 }
 
 #Preview("Objects List") {
-    @Previewable @State var viewModel: ObjectViewModel = {
-        let vm = ObjectViewModel()
-        vm.objects = [Object.placeholder]
-        return vm
-    }()
-    
-    ObjectsView(viewModel: viewModel)
+    ObjectsView()
 }

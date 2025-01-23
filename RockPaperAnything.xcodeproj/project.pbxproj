@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A6668112D41D7E900658111 /* ConfigureObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6668102D41D7E900658111 /* ConfigureObjectView.swift */; };
 		0A6F42622D408D4A004261E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425B2D408D4A004261E5 /* Preview Assets.xcassets */; };
 		0A6F42632D408D4A004261E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425D2D408D4A004261E5 /* Assets.xcassets */; };
 		0A6F42642D408D4A004261E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A6668102D41D7E900658111 /* ConfigureObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureObjectView.swift; sourceTree = "<group>"; };
 		0A6F42282D4089C6004261E5 /* RockPaperAnything.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RockPaperAnything.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F42382D4089C7004261E5 /* RockPaperAnythingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RockPaperAnythingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F42422D4089C7004261E5 /* RockPaperAnythingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RockPaperAnythingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
 				0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */,
 				0A6F42902D414309004261E5 /* LoginHeaderView.swift */,
+				0A6668102D41D7E900658111 /* ConfigureObjectView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6668112D41D7E900658111 /* ConfigureObjectView.swift in Sources */,
 				0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */,
 				0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */,
 				0A6F42662D408D4A004261E5 /* RockPaperAnythingApp.swift in Sources */,
