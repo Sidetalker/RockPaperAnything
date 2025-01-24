@@ -1,5 +1,5 @@
 {
-  "originHash" : "7593f2e1dc6cfe97a0ae6ea0dbbf720a5f91dd47f80598e85e26b50437aaa80d",
+  "originHash" : "ec58ff4118d4b5240778ab81cebb21a1af347db1da2d3159cff79f965d337426",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "0d885d28250fb1196b614bc9455079b75c531f72",
         "version" : "11.7.0"
-      }
-    },
-    {
-      "identity" : "gamekitui.swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftPackageRepository/GameKitUI.swift.git",
-      "state" : {
-        "revision" : "4e95f70fb99281d74913b840e8c593f33675f46b",
-        "version" : "0.5.1"
       }
     },
     {

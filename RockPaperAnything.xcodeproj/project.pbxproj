@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0A6668112D41D7E900658111 /* ConfigureObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6668102D41D7E900658111 /* ConfigureObjectView.swift */; };
+		0A6668192D42E53000658111 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6668182D42E53000658111 /* GamesView.swift */; };
+		0A66681B2D42E56C00658111 /* ObjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66681A2D42E56C00658111 /* ObjectsView.swift */; };
+		0A66681D2D42E99E00658111 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66681C2D42E99E00658111 /* Object.swift */; };
+		0A6668202D42E9D300658111 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A66681F2D42E9D300658111 /* Match.swift */; };
+		0A6668222D42EAFE00658111 /* GamesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6668212D42EAFE00658111 /* GamesViewModel.swift */; };
 		0A6F42622D408D4A004261E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425B2D408D4A004261E5 /* Preview Assets.xcassets */; };
 		0A6F42632D408D4A004261E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425D2D408D4A004261E5 /* Assets.xcassets */; };
 		0A6F42642D408D4A004261E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */; };
@@ -27,13 +32,14 @@
 		0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42822D40E8D2004261E5 /* LoginView.swift */; };
 		0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */; };
 		0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42872D40F7EF004261E5 /* User+Observable.swift */; };
-		0A6F428F2D410043004261E5 /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F428E2D410043004261E5 /* GameKitUI */; };
 		0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42902D414309004261E5 /* LoginHeaderView.swift */; };
 		0A6F42932D41929D004261E5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42922D41929D004261E5 /* FirebaseFirestore */; };
 		0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */; };
 		0A6F42982D41A3EA004261E5 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42972D41A3EA004261E5 /* Nuke */; };
 		0A6F429A2D41A62F004261E5 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42992D41A62F004261E5 /* NukeUI */; };
 		0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */; };
+		0AA196A62D42F52300907139 /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA196A52D42F52300907139 /* GameKitUI */; };
+		0AA196A82D4300A500907139 /* ActiveGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA196A72D4300A500907139 /* ActiveGameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +61,11 @@
 
 /* Begin PBXFileReference section */
 		0A6668102D41D7E900658111 /* ConfigureObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureObjectView.swift; sourceTree = "<group>"; };
+		0A6668182D42E53000658111 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
+		0A66681A2D42E56C00658111 /* ObjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectsView.swift; sourceTree = "<group>"; };
+		0A66681C2D42E99E00658111 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		0A66681F2D42E9D300658111 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		0A6668212D42EAFE00658111 /* GamesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewModel.swift; sourceTree = "<group>"; };
 		0A6F42282D4089C6004261E5 /* RockPaperAnything.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RockPaperAnything.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F42382D4089C7004261E5 /* RockPaperAnythingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RockPaperAnythingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A6F42422D4089C7004261E5 /* RockPaperAnythingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RockPaperAnythingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +84,7 @@
 		0A6F42902D414309004261E5 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectViewModel.swift; sourceTree = "<group>"; };
 		0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectView.swift; sourceTree = "<group>"; };
+		0AA196A72D4300A500907139 /* ActiveGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +94,6 @@
 			files = (
 				0A6F42982D41A3EA004261E5 /* Nuke in Frameworks */,
 				0A6F42772D408D88004261E5 /* FirebaseCrashlytics in Frameworks */,
-				0A6F428F2D410043004261E5 /* GameKitUI in Frameworks */,
 				0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */,
 				0A6F42752D408D88004261E5 /* FirebaseCore in Frameworks */,
 				0A6F429A2D41A62F004261E5 /* NukeUI in Frameworks */,
@@ -90,6 +101,7 @@
 				0A6F42932D41929D004261E5 /* FirebaseFirestore in Frameworks */,
 				0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */,
 				0A6F42732D408D88004261E5 /* FirebaseAnalytics in Frameworks */,
+				0AA196A62D42F52300907139 /* GameKitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +122,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A66681E2D42E9A400658111 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A66681C2D42E99E00658111 /* Object.swift */,
+				0A66681F2D42E9D300658111 /* Match.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0A6F421F2D4089C6004261E5 = {
 			isa = PBXGroup;
 			children = (
@@ -142,13 +163,14 @@
 			isa = PBXGroup;
 			children = (
 				0A6F42892D40FC5A004261E5 /* RockPaperAnything.entitlements */,
-				0A6F425C2D408D4A004261E5 /* Preview Content */,
+				0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */,
 				0A6F425D2D408D4A004261E5 /* Assets.xcassets */,
+				0A6F425C2D408D4A004261E5 /* Preview Content */,
 				0A6F42802D409715004261E5 /* View */,
 				0A6F42812D40971B004261E5 /* ViewModel */,
+				0A66681E2D42E9A400658111 /* Model */,
 				0A6F42862D40F7D2004261E5 /* Extensions */,
 				0A6F42602D408D4A004261E5 /* RockPaperAnythingApp.swift */,
-				0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */,
 			);
 			path = RockPaperAnything;
 			sourceTree = "<group>";
@@ -174,9 +196,12 @@
 			isa = PBXGroup;
 			children = (
 				0A6F42822D40E8D2004261E5 /* LoginView.swift */,
-				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
-				0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */,
 				0A6F42902D414309004261E5 /* LoginHeaderView.swift */,
+				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
+				0A66681A2D42E56C00658111 /* ObjectsView.swift */,
+				0A6668182D42E53000658111 /* GamesView.swift */,
+				0AA196A72D4300A500907139 /* ActiveGameView.swift */,
+				0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */,
 				0A6668102D41D7E900658111 /* ConfigureObjectView.swift */,
 			);
 			path = View;
@@ -187,6 +212,7 @@
 			children = (
 				0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */,
 				0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */,
+				0A6668212D42EAFE00658111 /* GamesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -222,10 +248,10 @@
 				0A6F42782D408D88004261E5 /* FirebaseDatabase */,
 				0A6F427A2D408D88004261E5 /* FirebaseStorage */,
 				0A6F427E2D40936E004261E5 /* FirebaseAuth */,
-				0A6F428E2D410043004261E5 /* GameKitUI */,
 				0A6F42922D41929D004261E5 /* FirebaseFirestore */,
 				0A6F42972D41A3EA004261E5 /* Nuke */,
 				0A6F42992D41A62F004261E5 /* NukeUI */,
+				0AA196A52D42F52300907139 /* GameKitUI */,
 			);
 			productName = RockPaperAnything;
 			productReference = 0A6F42282D4089C6004261E5 /* RockPaperAnything.app */;
@@ -305,8 +331,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				0A6F428D2D410043004261E5 /* XCRemoteSwiftPackageReference "GameKitUI.swift" */,
 				0A6F42962D41A3EA004261E5 /* XCRemoteSwiftPackageReference "Nuke" */,
+				0AA196A42D42F52300907139 /* XCLocalSwiftPackageReference "../GameKitUI.swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0A6F42292D4089C6004261E5 /* Products */;
@@ -356,13 +382,19 @@
 			files = (
 				0A6668112D41D7E900658111 /* ConfigureObjectView.swift in Sources */,
 				0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */,
+				0A6668192D42E53000658111 /* GamesView.swift in Sources */,
 				0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */,
 				0A6F42662D408D4A004261E5 /* RockPaperAnythingApp.swift in Sources */,
 				0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */,
+				0A6668202D42E9D300658111 /* Match.swift in Sources */,
 				0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */,
 				0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */,
+				0AA196A82D4300A500907139 /* ActiveGameView.swift in Sources */,
 				0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */,
+				0A6668222D42EAFE00658111 /* GamesViewModel.swift in Sources */,
 				0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */,
+				0A66681D2D42E99E00658111 /* Object.swift in Sources */,
+				0A66681B2D42E56C00658111 /* ObjectsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +727,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		0AA196A42D42F52300907139 /* XCLocalSwiftPackageReference "../GameKitUI.swift" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../GameKitUI.swift;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -702,14 +741,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.7.0;
-			};
-		};
-		0A6F428D2D410043004261E5 /* XCRemoteSwiftPackageReference "GameKitUI.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftPackageRepository/GameKitUI.swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.1;
 			};
 		};
 		0A6F42962D41A3EA004261E5 /* XCRemoteSwiftPackageReference "Nuke" */ = {
@@ -753,11 +784,6 @@
 			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		0A6F428E2D410043004261E5 /* GameKitUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0A6F428D2D410043004261E5 /* XCRemoteSwiftPackageReference "GameKitUI.swift" */;
-			productName = GameKitUI;
-		};
 		0A6F42922D41929D004261E5 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -772,6 +798,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A6F42962D41A3EA004261E5 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		0AA196A52D42F52300907139 /* GameKitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GameKitUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
