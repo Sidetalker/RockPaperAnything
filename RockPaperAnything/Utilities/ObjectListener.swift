@@ -19,7 +19,7 @@ import FirebaseFirestore
             }
             
             snapshot?.documentChanges.forEach { diff in
-                let newObject: Object
+                var newObject: Object
                 do {
                     newObject = try diff.document.data(as: Object.self)
                 } catch {

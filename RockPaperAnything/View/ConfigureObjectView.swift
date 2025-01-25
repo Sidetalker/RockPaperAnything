@@ -170,11 +170,8 @@ struct ObjectImageView: View {
     var object: Object
     var size: CGFloat
     
-    @State private var imageUrl: URL?
-    @State private var image: UIImage?
-    
     var body: some View {
-        LazyImage(url: imageUrl) { state in
+        LazyImage(object: object) { state in
             if let image = state.image {
                 image
                     .resizable()
@@ -188,8 +185,6 @@ struct ObjectImageView: View {
                 ProgressView()
                     .frame(width: 50, height: 50)
             }
-        }.task {
-            imageUrl = await object.getImageUrl()
         }
     }
 }

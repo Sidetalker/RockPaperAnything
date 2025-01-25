@@ -18,9 +18,9 @@ enum GameView: String, CaseIterable, Identifiable {
 
 struct GamesView: View {
     @State private var viewModel = GamesViewModel()
-    @State private var isShowingMatchmaking: Bool = false
     @State private var navStack: [Match] = []
     @State private var selection: GameView = .new
+    @State private var isStartingGame = false
     
     var body: some View {
         NavigationStack(path: $navStack) {
@@ -40,14 +40,22 @@ struct GamesView: View {
                             "\(viewModel.openGames.count) Ongoing Games",
                           systemImage: "globe.americas")
                 } actions: {
-                    Button(viewModel.openGames.isEmpty ?
-                           "Start New Game" : "Join Game") {
-                        Task {
-                            do {
-                                let match = try await viewModel.joinOrStartGame()
-                                navStack.append(match)
-                            } catch {
-                                Logger.log(error, message: "Error joining game")
+                    if isStartingGame {
+                        ProgressView()
+                    } else {
+                        Button(viewModel.openGames.isEmpty ?
+                               "Start New Game" : "Join Game") {
+                            isStartingGame = true
+                            
+                            Task {
+                                do {
+                                    let match = try await viewModel.joinOrStartGame()
+                                    navStack.append(match)
+                                    isStartingGame = false
+                                } catch {
+                                    Logger.log(error, message: "Error joining game")
+                                    isStartingGame = false
+                                }
                             }
                         }
                     }

@@ -175,6 +175,6 @@ struct FinishedGameView: View {
 }
 
 #Preview("Selection Made") {
-    @Previewable var object = Object(name: "Rock", imagePath: "images/2CABC044-1344-40C5-A458-27E394A1DD31.jpg", wins: [], loses: [], winCount: 0, timesUsed: 0)
+    @Previewable var object = Object.placeholder
     SelectionMadeView(object)
 }

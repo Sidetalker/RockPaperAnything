@@ -14,24 +14,16 @@ struct Object: Codable, Hashable, Identifiable {
     
     var name: String
     var imagePath: String
+    var downloadUrl: URL
     var wins: [DocumentReference]
     var loses: [DocumentReference]
     var winCount: Int
     var timesUsed: Int
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case imagePath
-        case wins
-        case loses
-        case winCount
-        case timesUsed
-    }
-    
     static var placeholder: Object = Object(
         name: "Rock",
         imagePath: "images/6834D814-5711-415F-99CD-4B6A0F698F1F.jpg",
+        downloadUrl: URL(string: "https://banner2.cleanpng.com/20180417/xve/avfo64zl4.webp")!,
         wins: [],
         loses: [],
         winCount: 5,
@@ -44,17 +36,5 @@ struct Object: Codable, Hashable, Identifiable {
         loses = newObject.loses
         winCount = newObject.winCount
         timesUsed = newObject.timesUsed
-    }
-    
-    func getImageUrl() async -> URL? {
-        let storage = Storage.storage()
-        let storageRef = storage.reference(withPath: imagePath)
-        
-        do {
-            return try await storageRef.downloadURL()
-        } catch {
-            print("Error getting URL: \(error)")
-            return nil
-        }
     }
 }

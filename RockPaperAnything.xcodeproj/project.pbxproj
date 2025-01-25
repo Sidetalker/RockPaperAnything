@@ -41,6 +41,7 @@
 		0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */; };
 		0A840F5D2D4442A10049A9E7 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A840F5C2D4442A10049A9E7 /* Logging.swift */; };
 		0A840F5F2D454BF80049A9E7 /* ObjectListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */; };
+		0A840F612D4558950049A9E7 /* LazyImage+Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A840F602D4558950049A9E7 /* LazyImage+Object.swift */; };
 		0AA196A62D42F52300907139 /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA196A52D42F52300907139 /* GameKitUI */; };
 		0AA196A82D4300A500907139 /* ActiveGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA196A72D4300A500907139 /* ActiveGameView.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectView.swift; sourceTree = "<group>"; };
 		0A840F5C2D4442A10049A9E7 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectListener.swift; sourceTree = "<group>"; };
+		0A840F602D4558950049A9E7 /* LazyImage+Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LazyImage+Object.swift"; sourceTree = "<group>"; };
 		0AA196A72D4300A500907139 /* ActiveGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				0A6F42872D40F7EF004261E5 /* User+Observable.swift */,
+				0A840F602D4558950049A9E7 /* LazyImage+Object.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				0A6668192D42E53000658111 /* GamesView.swift in Sources */,
 				0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */,
 				0A840F5D2D4442A10049A9E7 /* Logging.swift in Sources */,
+				0A840F612D4558950049A9E7 /* LazyImage+Object.swift in Sources */,
 				0A6F42662D408D4A004261E5 /* RockPaperAnythingApp.swift in Sources */,
 				0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */,
 				0A6668202D42E9D300658111 /* Match.swift in Sources */,

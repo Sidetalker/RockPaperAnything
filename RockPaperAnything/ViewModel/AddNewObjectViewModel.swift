@@ -39,7 +39,9 @@ class AddNewObjectViewModel {
             self.uploadProgress = progress
         }
         
-        return Object(name: "", imagePath: imagePath, wins: [], loses: [], winCount: 0, timesUsed: 0)
+        let downloadUrl = try await imageRef.downloadURL()
+        
+        return Object(name: "", imagePath: imagePath, downloadUrl: downloadUrl, wins: [], loses: [], winCount: 0, timesUsed: 0)
     }
     
     func delete() async {
