@@ -42,23 +42,26 @@ struct ActiveGameView: View {
     @Environment(ObjectListener.self) private var objectListener
     @State private var viewModel: ActiveGameViewModel
     
+    @Namespace private var animationNamespace
+    
     init(match: Match) {
         self.viewModel = ActiveGameViewModel(match: match)
     }
     
     var body: some View {
-        VStack {
+        ZStack {
             switch viewModel.state {
             case .makeSelection:
-                ObjectSelectionView(viewModel)
+                ObjectSelectionView(viewModel, namespace: animationNamespace)
             case .selectionMade:
-                SelectionMadeView(viewModel.selectedObject)
+                SelectionMadeView(viewModel.selectedObject, namespace: animationNamespace)
             case .resolvingGame:
                 ResolvingGameView(viewModel)
             case .finishedGame:
                 FinishedGameView(viewModel)
             }
         }
+        .animation(.easeIn(duration: 5), value: viewModel.state)
         .navigationTitle(viewModel.title)
         .task {
             await viewModel.load(using: objectListener.objects)
@@ -69,14 +72,16 @@ struct ActiveGameView: View {
 struct ObjectSelectionView: View {
     @Environment(ObjectListener.self) private var objectListener
     private var viewModel: ActiveGameViewModel
+    private var namespace: Namespace.ID
     
     private let config = [
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
     
-    init(_ viewModel: ActiveGameViewModel) {
+    init(_ viewModel: ActiveGameViewModel, namespace: Namespace.ID) {
         self.viewModel = viewModel
+        self.namespace = namespace
     }
     
     var body: some View {
@@ -86,7 +91,9 @@ struct ObjectSelectionView: View {
                     VStack {
                         ObjectImageView(object: object, size: 75)
                             .mask(Circle())
+                            .matchedGeometryEffect(id: object.id, in: namespace)
                         Text(object.name)
+                            .matchedGeometryEffect(id: object.name, in: namespace)
                     }.onTapGesture {
                         Task {
                             await viewModel.select(object: object)
@@ -100,9 +107,11 @@ struct ObjectSelectionView: View {
 
 struct SelectionMadeView: View {
     private var selectedObject: Object?
+    private var namespace: Namespace.ID
     
-    init(_ object: Object?) {
+    init(_ object: Object?, namespace: Namespace.ID) {
         self.selectedObject = object
+        self.namespace = namespace
     }
     
     var body: some View {
@@ -117,9 +126,11 @@ struct SelectionMadeView: View {
                         .clipShape(Circle())
                         .shadow(radius: 10)
                         .padding()
+                        .matchedGeometryEffect(id: selectedObject.id, in: namespace)
                     
                     Text(selectedObject.name)
                         .font(.headline)
+                        .matchedGeometryEffect(id: selectedObject.name, in: namespace)
                 }
                 .padding()
                 .background(Color.white)
@@ -176,5 +187,5 @@ struct FinishedGameView: View {
 
 #Preview("Selection Made") {
     @Previewable var object = Object.placeholder
-    SelectionMadeView(object)
+    SelectionMadeView(object, namespace: Namespace().wrappedValue)
 }
