@@ -32,7 +32,6 @@
 		0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F427A2D408D88004261E5 /* FirebaseStorage */; };
 		0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F427E2D40936E004261E5 /* FirebaseAuth */; };
 		0A6F42832D40E8D2004261E5 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42822D40E8D2004261E5 /* LoginView.swift */; };
-		0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */; };
 		0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42872D40F7EF004261E5 /* User+Observable.swift */; };
 		0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F42902D414309004261E5 /* LoginHeaderView.swift */; };
 		0A6F42932D41929D004261E5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42922D41929D004261E5 /* FirebaseFirestore */; };
@@ -41,6 +40,7 @@
 		0A6F429A2D41A62F004261E5 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6F42992D41A62F004261E5 /* NukeUI */; };
 		0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */; };
 		0A840F5D2D4442A10049A9E7 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A840F5C2D4442A10049A9E7 /* Logging.swift */; };
+		0A840F5F2D454BF80049A9E7 /* ObjectListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */; };
 		0AA196A62D42F52300907139 /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA196A52D42F52300907139 /* GameKitUI */; };
 		0AA196A82D4300A500907139 /* ActiveGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA196A72D4300A500907139 /* ActiveGameView.swift */; };
 /* End PBXBuildFile section */
@@ -82,13 +82,13 @@
 		0A6F426C2D408D57004261E5 /* RockPaperAnythingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingUITests.swift; sourceTree = "<group>"; };
 		0A6F426D2D408D57004261E5 /* RockPaperAnythingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperAnythingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0A6F42822D40E8D2004261E5 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectViewModel.swift; sourceTree = "<group>"; };
 		0A6F42872D40F7EF004261E5 /* User+Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Observable.swift"; sourceTree = "<group>"; };
 		0A6F42892D40FC5A004261E5 /* RockPaperAnything.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RockPaperAnything.entitlements; sourceTree = "<group>"; };
 		0A6F42902D414309004261E5 /* LoginHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHeaderView.swift; sourceTree = "<group>"; };
 		0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectViewModel.swift; sourceTree = "<group>"; };
 		0A6F429B2D41AF7F004261E5 /* AddNewObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewObjectView.swift; sourceTree = "<group>"; };
 		0A840F5C2D4442A10049A9E7 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectListener.swift; sourceTree = "<group>"; };
 		0AA196A72D4300A500907139 /* ActiveGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,12 +172,12 @@
 				0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */,
 				0A6F425D2D408D4A004261E5 /* Assets.xcassets */,
 				0A6F425C2D408D4A004261E5 /* Preview Content */,
+				0A6F42602D408D4A004261E5 /* RockPaperAnythingApp.swift */,
 				0A840F5B2D44427F0049A9E7 /* Utilities */,
 				0A6F42802D409715004261E5 /* View */,
 				0A6F42812D40971B004261E5 /* ViewModel */,
 				0A66681E2D42E9A400658111 /* Model */,
 				0A6F42862D40F7D2004261E5 /* Extensions */,
-				0A6F42602D408D4A004261E5 /* RockPaperAnythingApp.swift */,
 			);
 			path = RockPaperAnything;
 			sourceTree = "<group>";
@@ -202,9 +202,9 @@
 		0A6F42802D409715004261E5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
 				0A6F42822D40E8D2004261E5 /* LoginView.swift */,
 				0A6F42902D414309004261E5 /* LoginHeaderView.swift */,
-				0A6F425E2D408D4A004261E5 /* HomeView.swift */,
 				0A66681A2D42E56C00658111 /* ObjectsView.swift */,
 				0A6668182D42E53000658111 /* GamesView.swift */,
 				0AA196A72D4300A500907139 /* ActiveGameView.swift */,
@@ -218,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				0A6F42942D419966004261E5 /* AddNewObjectViewModel.swift */,
-				0A6F42842D40F5C8004261E5 /* ObjectViewModel.swift */,
 				0A6668212D42EAFE00658111 /* GamesViewModel.swift */,
 				0A2E251C2D44316700804F3C /* ActiveGameViewModel.swift */,
 			);
@@ -237,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				0A840F5C2D4442A10049A9E7 /* Logging.swift */,
+				0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -398,7 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A6668112D41D7E900658111 /* ConfigureObjectView.swift in Sources */,
-				0A6F42852D40F5C8004261E5 /* ObjectViewModel.swift in Sources */,
 				0A6668192D42E53000658111 /* GamesView.swift in Sources */,
 				0A6F42652D408D4A004261E5 /* HomeView.swift in Sources */,
 				0A840F5D2D4442A10049A9E7 /* Logging.swift in Sources */,
@@ -407,6 +406,7 @@
 				0A6668202D42E9D300658111 /* Match.swift in Sources */,
 				0A6F42912D414309004261E5 /* LoginHeaderView.swift in Sources */,
 				0A6F42882D40F7EF004261E5 /* User+Observable.swift in Sources */,
+				0A840F5F2D454BF80049A9E7 /* ObjectListener.swift in Sources */,
 				0AA196A82D4300A500907139 /* ActiveGameView.swift in Sources */,
 				0A6F429C2D41AF7F004261E5 /* AddNewObjectView.swift in Sources */,
 				0A6668222D42EAFE00658111 /* GamesViewModel.swift in Sources */,

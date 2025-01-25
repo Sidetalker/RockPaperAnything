@@ -19,6 +19,16 @@ struct Object: Codable, Hashable, Identifiable {
     var winCount: Int
     var timesUsed: Int
     
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case imagePath
+        case wins
+        case loses
+        case winCount
+        case timesUsed
+    }
+    
     static var placeholder: Object = Object(
         name: "Rock",
         imagePath: "images/6834D814-5711-415F-99CD-4B6A0F698F1F.jpg",
@@ -26,6 +36,15 @@ struct Object: Codable, Hashable, Identifiable {
         loses: [],
         winCount: 5,
         timesUsed: 8)
+    
+    mutating func update(with newObject: Object) {
+        name = newObject.name
+        imagePath = newObject.imagePath
+        wins = newObject.wins
+        loses = newObject.loses
+        winCount = newObject.winCount
+        timesUsed = newObject.timesUsed
+    }
     
     func getImageUrl() async -> URL? {
         let storage = Storage.storage()

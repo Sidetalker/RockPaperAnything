@@ -22,7 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct RockPaperAnythingApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var user = ObservableUser()
+    @State var user = ObservableUser()
     
     var body: some Scene {
         WindowGroup {

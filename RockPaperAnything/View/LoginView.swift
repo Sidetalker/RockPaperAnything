@@ -11,7 +11,7 @@ import GameKitUI
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var user: ObservableUser
+    @State var user: ObservableUser
     @State private var isShowingGKAuth = false
     
     var body: some View {

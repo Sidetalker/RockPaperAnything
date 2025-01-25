@@ -17,13 +17,8 @@ enum UploadError: Error {
 class AddNewObjectViewModel {
     private let storage = Storage.storage()
     
-    var objects: [Object]
     var uploadProgress: Progress?
     var uploadMetadata: StorageMetadata?
-    
-    init(objects: [Object]) {
-        self.objects = objects
-    }
     
     func upload(file: URL) async throws -> Object {
         guard let image = UIImage(contentsOfFile: file.path()) else {

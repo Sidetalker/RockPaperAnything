@@ -12,7 +12,6 @@ import SwiftUI
 @Observable
 public class ActiveGameViewModel {
     var match: Match
-    var objects: [Object] = []
     var selectedObject: Object?
     var gameResult: GameResult?
     
@@ -42,24 +41,15 @@ public class ActiveGameViewModel {
         self.match = match
     }
     
-    func load() async {
+    func load(using objects: [Object]) async {
         let db = Firestore.firestore()
         
         await checkWinner()
         
         guard gameResult == nil else { return }
         
-        do {
-            let snapshot = try await db.collection("objects").getDocuments(source: .cache)
-            objects = try snapshot.documents.map { doc in
-                return try doc.data(as: Object.self)
-            }
-            
-            if isCreator && match.player1Selection != "" {
-                selectedObject = objects.first(where: { $0.id == match.player1Selection })
-            }
-        } catch {
-            print("Error fetching objects from cache: \(error)")
+        if isCreator && match.player1Selection != "" {
+            selectedObject = objects.first(where: { $0.id == match.player1Selection })
         }
         
         guard let matchId = match.id else {

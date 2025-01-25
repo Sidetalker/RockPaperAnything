@@ -10,6 +10,6 @@ import SwiftUI
 
 extension User: @retroactive ObservableObject { }
 
-class ObservableUser: ObservableObject {
-    @Published var user: User?
+@Observable class ObservableUser {
+    var user: User?
 }

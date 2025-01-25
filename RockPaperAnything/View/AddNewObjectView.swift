@@ -9,8 +9,9 @@ import SwiftUI
 
 struct AddNewObjectView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(ObjectListener.self) private var objectListener
     
-    @State private var viewModel: AddNewObjectViewModel
+    @State private var viewModel = AddNewObjectViewModel()
     
     @FocusState private var isPromptFocused
     @State private var isImagePlaygroundPresented = false
@@ -18,10 +19,6 @@ struct AddNewObjectView: View {
     @State private var imageUrl: URL?
     
     @State private var newObject: Object?
-    
-    init(objects: [Object]) {
-        viewModel = AddNewObjectViewModel(objects: objects)
-    }
     
     private var isUploading: Bool {
         (viewModel.uploadProgress?.fractionCompleted ?? 1) < 1
@@ -104,7 +101,7 @@ struct AddNewObjectView: View {
                     }
                 } else if let newObject {
                     NavigationLink("Continue") {
-                        ConfigureObjectView(objects: viewModel.objects, newObject: newObject, imageUrl: imageUrl)
+                        ConfigureObjectView(objects: objectListener.objects, newObject: newObject, imageUrl: imageUrl)
                     }
                 }
                 Spacer()
@@ -133,5 +130,5 @@ struct AddNewObjectView: View {
 }
 
 #Preview("Add New") {
-    AddNewObjectView(objects: [Object.placeholder])
+    AddNewObjectView()
 }

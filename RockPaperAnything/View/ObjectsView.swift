@@ -9,7 +9,7 @@ import SwiftUI
 import ImagePlayground
 
 struct ObjectsView: View {
-    @State private var viewModel = ObjectViewModel()
+    @Environment(ObjectListener.self) private var objectListener
     
     @State private var isImagePlaygroundPresented = false
     @State private var prompt = ""
@@ -17,7 +17,7 @@ struct ObjectsView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.objects) {
+            List(objectListener.objects) {
                 ObjectCell(object: $0)
             }
             .navigationTitle("Objects")
@@ -27,10 +27,8 @@ struct ObjectsView: View {
                 }
             }
         }.fullScreenCover(isPresented: $isAddingItem) {
-            AddNewObjectView(objects: viewModel.objects)
+            AddNewObjectView()
                 .environment(\.modalMode, $isAddingItem)
-        }.onAppear {
-            viewModel.startListening()
         }
     }
 }

@@ -12,22 +12,18 @@ import SwiftUI
 import ImagePlayground
 
 struct ModalModeKey: EnvironmentKey {
-    static let defaultValue = Binding<Bool>.constant(false) // < required
+    static let defaultValue = Binding<Bool>.constant(false)
 }
 
 extension EnvironmentValues {
     var modalMode: Binding<Bool> {
-        get {
-            return self[ModalModeKey.self]
-        }
-        set {
-            self[ModalModeKey.self] = newValue
-        }
+        get { return self[ModalModeKey.self] }
+        set { self[ModalModeKey.self] = newValue }
     }
 }
 
 struct HomeView: View {
-    @EnvironmentObject var user: User
+    @State private var objectListener = ObjectListener()
     
     var body: some View {
         TabView {
@@ -39,7 +35,9 @@ struct HomeView: View {
                 .tabItem {
                     Label("Games", systemImage: "gamecontroller.fill")
                 }
-        }
+        }.task {
+            objectListener.startListening()
+        }.environment(objectListener)
     }
 }
 

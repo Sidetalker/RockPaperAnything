@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ConfigureObjectView: View {
     @Environment(\.modalMode) var modalMode
-    @Environment(\.dismiss) var dismiss
     
     private let db = Firestore.firestore()
     let objects: [Object]
@@ -106,9 +105,12 @@ struct ConfigureObjectView: View {
                         } else { return nil }
                     }
                     
+                    objectStates.append(.ties)
+                    
                     do {
                         try db.collection("objects").addDocument(from: newObject)
                     } catch {
+                        objectStates.removeLast()
                         Logger.log(error, message: "Error adding new object")
                     }
                 }.disabled(isSaveDisabled)

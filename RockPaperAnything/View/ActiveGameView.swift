@@ -39,6 +39,7 @@ enum GameResult {
 }
 
 struct ActiveGameView: View {
+    @Environment(ObjectListener.self) private var objectListener
     @State private var viewModel: ActiveGameViewModel
     
     init(match: Match) {
@@ -60,12 +61,13 @@ struct ActiveGameView: View {
         }
         .navigationTitle(viewModel.title)
         .task {
-            await viewModel.load()
+            await viewModel.load(using: objectListener.objects)
         }
     }
 }
 
 struct ObjectSelectionView: View {
+    @Environment(ObjectListener.self) private var objectListener
     private var viewModel: ActiveGameViewModel
     
     private let config = [
@@ -80,7 +82,7 @@ struct ObjectSelectionView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: config) {
-                ForEach(viewModel.objects) { object in
+                ForEach(objectListener.objects) { object in
                     VStack {
                         ObjectImageView(object: object, size: 75)
                             .mask(Circle())
@@ -95,27 +97,6 @@ struct ObjectSelectionView: View {
         }
     }
 }
-
-// struct SelectionMadeView: View {
-//     private var viewModel: ActiveGameViewModel
-    
-//     init(_ viewModel: ActiveGameViewModel) {
-//         self.viewModel = viewModel
-//     }
-    
-//     var body: some View {
-//         if let selectedObject = viewModel.selectedObject {
-//             VStack {
-//                 Text("Waiting for another player")
-//                 ObjectImageView(object: selectedObject, size: 200)
-//                     .mask(Circle())
-//                 Text(selectedObject.name)
-//             }
-//         } else {
-//             ProgressView()
-//         }
-//     }
-// }
 
 struct SelectionMadeView: View {
     private var selectedObject: Object?
