@@ -137,7 +137,6 @@ struct SelectionMadeView: View {
                     
                     Text(selectedObject.name)
                         .matchedGeometryEffect(id: selectedObject.name, in: namespace)
-                        .font(.headline)
                 }
                 .padding()
                 .background(Color.white)
