@@ -27,11 +27,11 @@ struct Match: Codable, Hashable, Identifiable {
     var player1Selection: String
     var player2Selection: String
     
-    init(_ match: GKTurnBasedMatch) {
-        matchId = match.matchID
+    init(playerId: String) {
+        matchId = "non-gc-match"
         creationDate = Date()
-        status = match.status
-        participants = match.participants.compactMap { $0.player?.gamePlayerID }
+        status = .open
+        participants = [playerId]
         player1Selection = ""
         player2Selection = ""
     }

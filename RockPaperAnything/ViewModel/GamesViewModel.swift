@@ -78,31 +78,18 @@ class GamesViewModel: NSObject, GKLocalPlayerListener {
     }
     
     func joinOrStartGame() async throws -> Match {
-        let request = GKMatchRequest()
-        request.maxPlayers = 2
-        request.minPlayers = 2
-        
-        let gkMatch = try await GKTurnBasedMatch.find(for: request)
-        
-        // Look up existing game
-        let snapshot = try await db.collection("games").whereField("matchId", isEqualTo: gkMatch.matchID).getDocuments()
-        
-        if snapshot.documents.isEmpty {
-            // Create new game
-            var match = Match(gkMatch)
-            let reference = try db.collection("games").addDocument(from: match)
-            match.id = reference.documentID
-            return match
-        } else if var existingMatch = try snapshot.documents.first?.data(as: Match.self), let docId = existingMatch.id {
-            // Update existing game to include new player
+        if var joinableGame = openGames.first, let docId = joinableGame.id {
             try await db.collection("games").document(docId).updateData([
                 "participants": FieldValue.arrayUnion([playerId])
             ])
-            existingMatch.participants.append(playerId)
-            return existingMatch
+            joinableGame.participants.append(playerId)
+            return joinableGame
+        } else {
+            var newMatch = Match(playerId: playerId)
+            let reference = try db.collection("games").addDocument(from: newMatch)
+            newMatch.id = reference.documentID
+            return newMatch
         }
-        
-        throw MatchError.creationError
     }
     
     func player(_ player: GKPlayer, receivedTurnEventFor match: GKTurnBasedMatch, didBecomeActive: Bool) {
