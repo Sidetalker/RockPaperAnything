@@ -34,40 +34,6 @@ struct GamesView: View {
             
             switch selection {
             case .new:
-//                VStack {
-//                    Spacer()
-//                    Button {
-//                        isShowingMatchmaking.toggle()
-//                    } label: {
-//                        Text("Start Matchmaking")
-//                    }.sheet(isPresented: $isShowingMatchmaking) { GKTurnBasedMatchmakerView(
-//                        minPlayers: 2,
-//                        maxPlayers: 2,
-//                        inviteMessage: "Come play Rock, Paper, Anything!"
-//                    ) {
-//                        print("Player Canceled")
-//                    } failed: { error in
-//                        print("Match Making Failed: \(error)")
-//                    } started: { match in
-//                        print("Match Started: \(match)")
-//                        
-//                        if let existingMatch = viewModel.games.first(where: { $0.matchId == match.matchID }) {
-//                            print("Selected existing match")
-//                            navStack.append(existingMatch)
-//                            return
-//                        }
-//                        
-//                        guard let match = viewModel.createMatch(match) else {
-//                            print("Failed to initialize match")
-//                            return
-//                        }
-//                        navStack.append(match)
-//                    }.ignoresSafeArea(edges: .bottom)}
-//                    Spacer()
-//                }.navigationDestination(for: Match.self) { match in
-//                    ActiveGameView(match: match)
-//                }.navigationTitle("Games")
-                
                 ContentUnavailableView {
                     Label(viewModel.openGames.isEmpty ?
                           "No Joinable Games" :
@@ -81,7 +47,7 @@ struct GamesView: View {
                                 let match = try await viewModel.joinOrStartGame()
                                 navStack.append(match)
                             } catch {
-                                print("Error joining game: \(error)")
+                                Logger.log(error, message: "Error joining game")
                             }
                         }
                     }

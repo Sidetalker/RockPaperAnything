@@ -96,7 +96,7 @@ struct AddNewObjectView: View {
                             do {
                                 self.newObject = try await viewModel.upload(file: imageUrl)
                             } catch {
-                                print("Upload error: \(error)")
+                                Logger.log(error, message: "Upload error")
                             }
                         }
                     }) {

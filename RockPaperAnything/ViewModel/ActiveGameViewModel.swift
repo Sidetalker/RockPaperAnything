@@ -34,6 +34,10 @@ public class ActiveGameViewModel {
         }
     }
     
+    var title: String {
+        return state.navTitle(result: gameResult)
+    }
+    
     init(match: Match) {
         self.match = match
     }

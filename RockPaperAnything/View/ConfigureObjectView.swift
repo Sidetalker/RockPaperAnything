@@ -109,7 +109,7 @@ struct ConfigureObjectView: View {
                     do {
                         try db.collection("objects").addDocument(from: newObject)
                     } catch {
-                        print("Error adding new object: \(error)")
+                        Logger.log(error, message: "Error adding new object")
                     }
                 }.disabled(isSaveDisabled)
             }

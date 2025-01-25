@@ -17,20 +17,17 @@ class ObjectViewModel {
     func startListening() {
         db.collection("objects").addSnapshotListener { documentSnapshot, error in
             if let error {
-                print("Snapshot listener error: \(error)")
+                Logger.log(error, message: "Objects snapshot listener error")
                 return
             }
             
-            guard let documents = documentSnapshot?.documents else {
-                print("No documents")
-                return
-            }
+            guard let documents = documentSnapshot?.documents else { return }
             
             self.objects = documents.compactMap { doc in
                 do {
                     return try doc.data(as: Object.self)
                 } catch {
-                    print("Decoding error: \(error)")
+                    Logger.log(error, message: "Object decoding error")
                     return nil
                 }
             }

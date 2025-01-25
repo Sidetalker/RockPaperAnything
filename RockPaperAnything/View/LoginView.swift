@@ -5,6 +5,7 @@
 //  Created by Kevin Sullivan on 1/22/25.
 //
 
+import FirebaseCrashlytics
 import FirebaseAuth
 import GameKitUI
 import SwiftUI
@@ -35,19 +36,17 @@ struct LoginView: View {
                 .buttonBorderShape(.roundedRectangle)
             } else {
                 GKAuthenticationView { error in
-                    print("Error signing in to GC: \(error)")
+                    Logger.log(error, message: "Error signing in to GC")
                 } authenticated: { player in
-                    print("Signed in \(player)")
+                    Crashlytics.crashlytics().setUserID(player.gamePlayerID)
                     
                     Task {
                         do {
                             let credential = try await GameCenterAuthProvider.getCredential()
                             let result = try await Auth.auth().signIn(with: credential)
                             user.user = result.user
-                            
-                            print("Signed in \(result.user)")
                         } catch {
-                            print("Error signing in to Firebase: \(error)")
+                            Logger.log(error, message: "Error signing into Firebase")
                         }
                     }
                 }

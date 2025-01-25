@@ -27,12 +27,12 @@ class AddNewObjectViewModel {
     
     func upload(file: URL) async throws -> Object {
         guard let image = UIImage(contentsOfFile: file.path()) else {
-            print("Could not load image from \(file)")
+            Logger.log(UploadError.imageLoadFail, message: "Could not load image from \(file)")
             throw UploadError.imageLoadFail
         }
         
         guard let imageData = image.jpegData(compressionQuality: 1) else {
-            print("Could not create JPG data from image")
+            Logger.log(UploadError.imageDataFail, message: "Could not create JPG data from image")
             throw UploadError.imageDataFail
         }
         
@@ -42,20 +42,13 @@ class AddNewObjectViewModel {
         
         _ = try await imageRef.putDataAsync(imageData) { progress in
             self.uploadProgress = progress
-            
-            if let progress {
-                print("Upload progress: \(progress.fractionCompleted)")
-            }
         }
         
         return Object(name: "", imagePath: imagePath, wins: [], loses: [], winCount: 0, timesUsed: 0)
     }
     
     func delete() async {
-        guard let path = uploadMetadata?.path else {
-            print("Nothing to delete")
-            return
-        }
+        guard let path = uploadMetadata?.path else { return }
         
         let storageRef = storage.reference()
         let imageRef = storageRef.child(path)
@@ -63,7 +56,7 @@ class AddNewObjectViewModel {
         do {
             try await imageRef.delete()
         } catch {
-            print("Deletion error: \(error)")
+            Logger.log(error, message: "Error deleting uploaded image")
         }
     }
 }
