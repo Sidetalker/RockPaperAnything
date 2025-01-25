@@ -157,7 +157,8 @@ struct ObjectView: View {
     
     var body: some View {
         VStack {
-            ObjectImageView(object: object, size: 75)
+            ObjectImageView(object: object)
+                .frame(width: 50, height: 50)
                 .overlay(Circle().stroke(state.color, lineWidth: state.width))
             Text(object.name)
         }.onTapGesture {
@@ -168,22 +169,18 @@ struct ObjectView: View {
 
 struct ObjectImageView: View {
     var object: Object
-    var size: CGFloat
     
     var body: some View {
         LazyImage(object: object) { state in
             if let image = state.image {
                 image
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .clipShape(Circle())
-                    .frame(width: size, height: size)
             } else if state.error != nil {
                 Image(systemName: "exclamationmark.icloud")
-                    .frame(width: size, height: size)
             } else {
                 ProgressView()
-                    .frame(width: 50, height: 50)
             }
         }
     }

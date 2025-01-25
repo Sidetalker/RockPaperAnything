@@ -38,7 +38,8 @@ struct ObjectCell: View {
     
     var body: some View {
         HStack {
-            ObjectImageView(object: object, size: 50)
+            ObjectImageView(object: object)
+                .frame(width: 50)
             Text(object.name).padding(10)
         }
     }

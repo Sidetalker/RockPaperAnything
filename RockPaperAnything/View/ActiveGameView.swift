@@ -61,7 +61,7 @@ struct ActiveGameView: View {
                 FinishedGameView(viewModel)
             }
         }
-        .animation(.easeIn(duration: 5), value: viewModel.state)
+        .animation(.easeIn, value: viewModel.state)
         .navigationTitle(viewModel.title)
         .task {
             await viewModel.load(using: objectListener.objects)
@@ -89,9 +89,13 @@ struct ObjectSelectionView: View {
             LazyVGrid(columns: config) {
                 ForEach(objectListener.objects) { object in
                     VStack {
-                        ObjectImageView(object: object, size: 75)
-                            .mask(Circle())
+                        Rectangle()
+                            .fill(Color.clear)
+                            .overlay {
+                                ObjectImageView(object: object)
+                            }
                             .matchedGeometryEffect(id: object.id, in: namespace)
+                            .frame(width: 75, height: 75)
                         Text(object.name)
                             .matchedGeometryEffect(id: object.name, in: namespace)
                     }.onTapGesture {
@@ -122,15 +126,18 @@ struct SelectionMadeView: View {
                         .font(.title)
                         .fontWeight(.semibold)
                     
-                    ObjectImageView(object: selectedObject, size: 200)
-                        .clipShape(Circle())
-                        .shadow(radius: 10)
-                        .padding()
+                    Rectangle()
+                        .fill(Color.clear)
+                        .overlay {
+                            ObjectImageView(object: selectedObject)
+                                .shadow(radius: 10)
+                        }
                         .matchedGeometryEffect(id: selectedObject.id, in: namespace)
+                        .frame(width: 200, height: 200)
                     
                     Text(selectedObject.name)
-                        .font(.headline)
                         .matchedGeometryEffect(id: selectedObject.name, in: namespace)
+                        .font(.headline)
                 }
                 .padding()
                 .background(Color.white)
