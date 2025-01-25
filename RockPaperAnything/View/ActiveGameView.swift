@@ -32,10 +32,10 @@ enum GameState {
     }
 }
 
-enum GameResult {
-    case won
-    case lost
-    case tied
+enum GameResult: String {
+    case won = "You Won"
+    case lost = "You Lost"
+    case tied = "Tie Game"
 }
 
 struct ActiveGameView: View {
@@ -173,16 +173,50 @@ struct FinishedGameView: View {
     }
     
     var body: some View {
-        switch viewModel.gameResult {
-        case .won:
-            Text("You Won")
-        case .lost:
-            Text("You Lost")
-        case .tied:
-            Text("Tie Game")
-        case nil:
-            ProgressView()
+        VStack(spacing: 20) {
+            Text("Game Over")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            HStack {
+                if let selectedObject = viewModel.selectedObject {
+                    VStack {
+                        ObjectImageView(object: selectedObject)
+                            .frame(width: 100, height: 100)
+                            .shadow(radius: 10)
+                        
+                        Text("You")
+                            .font(.headline)
+                    }
+                }
+                
+                Text("VS")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.horizontal)
+                
+                if let opponentObject = viewModel.opponentObject {
+                    VStack {
+                        ObjectImageView(object: opponentObject)
+                            .frame(width: 100, height: 100)
+                            .shadow(radius: 10)
+                        
+                        Text("Opponent")
+                            .font(.headline)
+                    }
+                }
+            }
+            
+            Text(viewModel.resultText)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding(.top)
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .padding()
     }
 }
 

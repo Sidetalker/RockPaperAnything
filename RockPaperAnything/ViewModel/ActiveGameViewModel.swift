@@ -13,6 +13,7 @@ import SwiftUI
 public class ActiveGameViewModel {
     var match: Match
     var selectedObject: Object?
+    var opponentObject: Object?
     var gameResult: GameResult?
     
     private let playerId = GKLocalPlayer.local.gamePlayerID
@@ -37,6 +38,10 @@ public class ActiveGameViewModel {
         return state.navTitle(result: gameResult)
     }
     
+    var resultText: String {
+        return gameResult?.rawValue ?? "Unknown Result"
+    }
+    
     init(match: Match) {
         self.match = match
     }
@@ -44,16 +49,12 @@ public class ActiveGameViewModel {
     func load(using objects: [Object]) async {
         let db = Firestore.firestore()
         
-        await checkWinner()
+        await checkWinner(objects: objects)
         
         guard gameResult == nil else { return }
         
-        if isCreator && match.player1Selection != "" {
-            selectedObject = objects.first(where: { $0.id == match.player1Selection })
-        }
-        
         guard let matchId = match.id else {
-            print("Error resolving matchId to start listening")
+            Logger.log("Error resolving matchId to start listening")
             return
         }
         
@@ -61,14 +62,18 @@ public class ActiveGameViewModel {
             guard let snapshot else { return }
             do {
                 self.match = try snapshot.data(as: Match.self)
-                Task { await self.checkWinner() }
+                Task { await self.checkWinner(objects: objects) }
             } catch {
-                print("Error decoding realtime match update")
+                Logger.log(error, message: "Error decoding realtime match update")
+                print()
             }
         }
     }
     
-    func checkWinner() async {
+    func checkWinner(objects: [Object]) async {
+        selectedObject = objects.first(where: { $0.id == (isCreator ? match.player1Selection : match.player2Selection) })
+        opponentObject = objects.first(where: { $0.id == (isCreator ? match.player2Selection : match.player1Selection) })
+        
         do {
             let winner = try await match.determineWinner()
             
