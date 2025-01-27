@@ -213,7 +213,7 @@ struct FinishedGameView: View {
                 .padding(.top)
         }
         .padding()
-        .background(Color.white)
+        .background(Color(UIColor.systemGray6))
         .cornerRadius(20)
         .shadow(radius: 10)
         .padding()
