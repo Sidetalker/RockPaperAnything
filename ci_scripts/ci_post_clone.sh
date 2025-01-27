@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Skip plugin validation
+defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
+
 # Define the source and destination file paths
 source_file="ci_env"
 destination_file="../.env"
