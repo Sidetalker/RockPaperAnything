@@ -1,5 +1,5 @@
 {
-  "originHash" : "5dfc214e96d7602618c91bc2027b9ad5246c01abbc34bd55f18c57f974f20e4b",
+  "originHash" : "411ce99631bd030c3d0cde4db90aaaa0263baa0defe2cf91e88c23080d2ad459",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -125,6 +125,15 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
+      }
+    },
+    {
+      "identity" : "secretsmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vdka/SecretsManager.git",
+      "state" : {
+        "revision" : "66af2ab2e88b2d68a2385734fa86c87c3236d44f",
+        "version" : "1.1.4"
       }
     },
     {

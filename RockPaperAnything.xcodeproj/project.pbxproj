@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0096232D48429800DE4A09 /* SecretsManager in Frameworks */ = {isa = PBXBuildFile; productRef = 0A0096222D48429800DE4A09 /* SecretsManager */; };
 		0A1595F62D4436C50082C75F /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A1595F52D4436C50082C75F /* GameKitUI */; };
 		0A2E251D2D44316700804F3C /* ActiveGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2E251C2D44316700804F3C /* ActiveGameViewModel.swift */; };
 		0A6668112D41D7E900658111 /* ConfigureObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6668102D41D7E900658111 /* ConfigureObjectView.swift */; };
@@ -44,6 +45,8 @@
 		0A840F612D4558950049A9E7 /* LazyImage+Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A840F602D4558950049A9E7 /* LazyImage+Object.swift */; };
 		0AA196A62D42F52300907139 /* GameKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0AA196A52D42F52300907139 /* GameKitUI */; };
 		0AA196A82D4300A500907139 /* ActiveGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA196A72D4300A500907139 /* ActiveGameView.swift */; };
+		0AE14AB72D483F49001407EC /* SecretsManager in Frameworks */ = {isa = PBXBuildFile; productRef = 0AE14AB62D483F49001407EC /* SecretsManager */; };
+		0AE14ABF2D4841F1001407EC /* Firebase+Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE14ABE2D4841F1001407EC /* Firebase+Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +94,11 @@
 		0A840F5C2D4442A10049A9E7 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectListener.swift; sourceTree = "<group>"; };
 		0A840F602D4558950049A9E7 /* LazyImage+Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LazyImage+Object.swift"; sourceTree = "<group>"; };
+		0A840F622D458DBA0049A9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0AA196A72D4300A500907139 /* ActiveGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameView.swift; sourceTree = "<group>"; };
+		0AE14ABE2D4841F1001407EC /* Firebase+Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firebase+Secrets.swift"; sourceTree = "<group>"; };
+		0AFA5A882D4835AE00B94461 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
+		0AFA5A892D4835E000B94461 /* ci_env */ = {isa = PBXFileReference; lastKnownFileType = text; path = ci_env; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,12 +110,14 @@
 				0A6F42772D408D88004261E5 /* FirebaseCrashlytics in Frameworks */,
 				0A6F427F2D40936E004261E5 /* FirebaseAuth in Frameworks */,
 				0A6F42752D408D88004261E5 /* FirebaseCore in Frameworks */,
+				0A0096232D48429800DE4A09 /* SecretsManager in Frameworks */,
 				0A6F429A2D41A62F004261E5 /* NukeUI in Frameworks */,
 				0A6F42792D408D88004261E5 /* FirebaseDatabase in Frameworks */,
 				0A6F42932D41929D004261E5 /* FirebaseFirestore in Frameworks */,
 				0A6F427B2D408D88004261E5 /* FirebaseStorage in Frameworks */,
 				0A1595F62D4436C50082C75F /* GameKitUI in Frameworks */,
 				0A6F42732D408D88004261E5 /* FirebaseAnalytics in Frameworks */,
+				0AE14AB72D483F49001407EC /* SecretsManager in Frameworks */,
 				0AA196A62D42F52300907139 /* GameKitUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +151,7 @@
 		0A6F421F2D4089C6004261E5 = {
 			isa = PBXGroup;
 			children = (
+				0AFA5A872D48359800B94461 /* ci_scripts */,
 				0A6F42612D408D4A004261E5 /* RockPaperAnything */,
 				0A6F426A2D408D55004261E5 /* RockPaperAnythingTests */,
 				0A6F426E2D408D57004261E5 /* RockPaperAnythingUITests */,
@@ -170,6 +180,7 @@
 		0A6F42612D408D4A004261E5 /* RockPaperAnything */ = {
 			isa = PBXGroup;
 			children = (
+				0A840F622D458DBA0049A9E7 /* Info.plist */,
 				0A6F42892D40FC5A004261E5 /* RockPaperAnything.entitlements */,
 				0A6F425F2D408D4A004261E5 /* GoogleService-Info.plist */,
 				0A6F425D2D408D4A004261E5 /* Assets.xcassets */,
@@ -231,6 +242,7 @@
 			children = (
 				0A6F42872D40F7EF004261E5 /* User+Observable.swift */,
 				0A840F602D4558950049A9E7 /* LazyImage+Object.swift */,
+				0AE14ABE2D4841F1001407EC /* Firebase+Secrets.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,6 +254,15 @@
 				0A840F5E2D454BF80049A9E7 /* ObjectListener.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0AFA5A872D48359800B94461 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				0AFA5A892D4835E000B94461 /* ci_env */,
+				0AFA5A882D4835AE00B94461 /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +279,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0A0096252D4842AD00DE4A09 /* PBXTargetDependency */,
 			);
 			name = RockPaperAnything;
 			packageProductDependencies = (
@@ -272,6 +294,8 @@
 				0A6F42992D41A62F004261E5 /* NukeUI */,
 				0AA196A52D42F52300907139 /* GameKitUI */,
 				0A1595F52D4436C50082C75F /* GameKitUI */,
+				0AE14AB62D483F49001407EC /* SecretsManager */,
+				0A0096222D48429800DE4A09 /* SecretsManager */,
 			);
 			productName = RockPaperAnything;
 			productReference = 0A6F42282D4089C6004261E5 /* RockPaperAnything.app */;
@@ -353,6 +377,7 @@
 				0A6F42712D408D88004261E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				0A6F42962D41A3EA004261E5 /* XCRemoteSwiftPackageReference "Nuke" */,
 				0A1595F42D4436C50082C75F /* XCRemoteSwiftPackageReference "GameKitUI.swift" */,
+				0A0096212D48429800DE4A09 /* XCRemoteSwiftPackageReference "SecretsManager" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0A6F42292D4089C6004261E5 /* Products */;
@@ -418,6 +443,7 @@
 				0A6F42952D419966004261E5 /* AddNewObjectViewModel.swift in Sources */,
 				0A66681D2D42E99E00658111 /* Object.swift in Sources */,
 				0A66681B2D42E56C00658111 /* ObjectsView.swift in Sources */,
+				0AE14ABF2D4841F1001407EC /* Firebase+Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +467,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0A0096252D4842AD00DE4A09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 0A0096242D4842AD00DE4A09 /* SecretsManagerPlugin */;
+		};
 		0A6F423A2D4089C7004261E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0A6F42272D4089C6004261E5 /* RockPaperAnything */;
@@ -585,6 +615,7 @@
 				DEVELOPMENT_TEAM = S7BT87895F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RockPaperAnything/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -617,6 +648,7 @@
 				DEVELOPMENT_TEAM = S7BT87895F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RockPaperAnything/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -751,6 +783,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0A0096212D48429800DE4A09 /* XCRemoteSwiftPackageReference "SecretsManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vdka/SecretsManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
 		0A1595F42D4436C50082C75F /* XCRemoteSwiftPackageReference "GameKitUI.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftPackageRepository/GameKitUI.swift.git";
@@ -778,6 +818,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A0096222D48429800DE4A09 /* SecretsManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A0096212D48429800DE4A09 /* XCRemoteSwiftPackageReference "SecretsManager" */;
+			productName = SecretsManager;
+		};
+		0A0096242D4842AD00DE4A09 /* SecretsManagerPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A0096212D48429800DE4A09 /* XCRemoteSwiftPackageReference "SecretsManager" */;
+			productName = "plugin:SecretsManagerPlugin";
+		};
 		0A1595F52D4436C50082C75F /* GameKitUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0A1595F42D4436C50082C75F /* XCRemoteSwiftPackageReference "GameKitUI.swift" */;
@@ -831,6 +881,10 @@
 		0AA196A52D42F52300907139 /* GameKitUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GameKitUI;
+		};
+		0AE14AB62D483F49001407EC /* SecretsManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SecretsManager;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
