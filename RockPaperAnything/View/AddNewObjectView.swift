@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddNewObjectView: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(ObjectListener.self) private var objectListener
+    @Environment(\.objects) private var objects
     
     @State private var viewModel = AddNewObjectViewModel()
     
@@ -101,7 +101,7 @@ struct AddNewObjectView: View {
                     }
                 } else if let newObject {
                     NavigationLink("Continue") {
-                        ConfigureObjectView(objects: objectListener.objects, newObject: newObject, imageUrl: imageUrl)
+                        ConfigureObjectView(objects: objects, newObject: newObject, imageUrl: imageUrl)
                     }
                 }
                 Spacer()

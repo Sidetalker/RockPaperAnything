@@ -5,6 +5,7 @@
 //  Created by Kevin Sullivan on 1/23/25.
 //
 
+import EventSource
 import GameKit
 import FirebaseFirestore
 import SwiftUI
@@ -140,6 +141,30 @@ public class ActiveGameViewModel {
             gameResult = .tied
         } else {
             gameResult = winner == playerId ? .won : .lost
+        }
+    }
+    
+    private func tieBreaker() async throws {
+        guard let selectedObject, let opponentObject, gameResult == .tied else {
+            Logger.log(MatchError.developerError, message: "Invalid match state for tieBreaker: \(match)")
+            throw MatchError.developerError
+        }
+        
+        let eventSource = EventSource()
+        let urlRequest = Network.deepSeekRequest(for: selectedObject, vs: opponentObject)
+        let dataTask = await eventSource.dataTask(for: urlRequest)
+
+        for await event in await dataTask.events() {
+            switch event {
+            case .open:
+                print("Connection was opened.")
+            case .error(let error):
+                print("Received an error:", error.localizedDescription)
+            case .event(let event):
+                print("Received an event", event.data ?? "")
+            case .closed:
+                print("Connection was closed.")
+            }
         }
     }
 }

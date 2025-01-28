@@ -1,1 +1,3 @@
 export FIREBASE_API_KEY
+export DEEPSEEK_API_KEY 
+export GETIMG_API_KEY

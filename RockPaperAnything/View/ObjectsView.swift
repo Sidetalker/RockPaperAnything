@@ -9,7 +9,7 @@ import SwiftUI
 import ImagePlayground
 
 struct ObjectsView: View {
-    @Environment(ObjectListener.self) private var objectListener
+    @Environment(\.objects) private var objects
     
     @State private var isImagePlaygroundPresented = false
     @State private var prompt = ""
@@ -17,7 +17,7 @@ struct ObjectsView: View {
     
     var body: some View {
         NavigationView {
-            List(objectListener.objects) {
+            List(objects) {
                 ObjectCell(object: $0)
             }
             .navigationTitle("Objects")

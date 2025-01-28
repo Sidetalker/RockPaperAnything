@@ -39,7 +39,7 @@ enum GameResult: String {
 }
 
 struct ActiveGameView: View {
-    @Environment(ObjectListener.self) private var objectListener
+    @Environment(\.objects) private var objects
     @State private var viewModel: ActiveGameViewModel
     
     @Namespace private var animationNamespace
@@ -64,13 +64,13 @@ struct ActiveGameView: View {
         .animation(.easeIn, value: viewModel.state)
         .navigationTitle(viewModel.title)
         .task {
-            await viewModel.load(using: objectListener.objects)
+            await viewModel.load(using: objects)
         }
     }
 }
 
 struct ObjectSelectionView: View {
-    @Environment(ObjectListener.self) private var objectListener
+    @Environment(\.objects) private var objects
     private var viewModel: ActiveGameViewModel
     private var namespace: Namespace.ID
     
@@ -87,7 +87,7 @@ struct ObjectSelectionView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: config) {
-                ForEach(objectListener.objects) { object in
+                ForEach(objects) { object in
                     VStack {
                         Rectangle()
                             .fill(Color.clear)

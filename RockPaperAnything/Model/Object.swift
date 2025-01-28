@@ -29,6 +29,12 @@ struct Object: Codable, Hashable, Identifiable {
         winCount: 5,
         timesUsed: 8)
     
+    static func object(named name: String) -> Object {
+        var object = Object.placeholder
+        object.name = name
+        return object
+    }
+    
     mutating func update(with newObject: Object) {
         name = newObject.name
         imagePath = newObject.imagePath
