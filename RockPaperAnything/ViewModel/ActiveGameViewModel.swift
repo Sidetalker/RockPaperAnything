@@ -11,12 +11,14 @@ import SwiftUI
 
 @Observable
 public class ActiveGameViewModel {
+    
+    private let playerId = GKLocalPlayer.local.gamePlayerID
+    private let db = Firestore.firestore()
+    
     var match: Match
     var selectedObject: Object?
     var opponentObject: Object?
     var gameResult: GameResult?
-    
-    private let playerId = GKLocalPlayer.local.gamePlayerID
     
     var isCreator: Bool {
         playerId == match.participants.first
@@ -47,8 +49,6 @@ public class ActiveGameViewModel {
     }
     
     func load(using objects: [Object]) async {
-        let db = Firestore.firestore()
-        
         await checkWinner(objects: objects)
         
         guard gameResult == nil else { return }
@@ -65,7 +65,6 @@ public class ActiveGameViewModel {
                 Task { await self.checkWinner(objects: objects) }
             } catch {
                 Logger.log(error, message: "Error decoding realtime match update")
-                print()
             }
         }
     }
@@ -87,7 +86,7 @@ public class ActiveGameViewModel {
         } catch is MatchError {
             // Expected if the match has not completed, continue as usual
         } catch {
-            print("Unexpected error resolving match: \(error)")
+            Logger.log(error, message: "Unexpected error resolving match")
         }
     }
     
@@ -95,48 +94,52 @@ public class ActiveGameViewModel {
         selectedObject = object
         
         do {
-            let db = Firestore.firestore()
-            
-            guard let docId = match.id, let objectId = object.id else {
-                print("Error resolving match or object id")
-                return
-            }
-            
             if isCreator {
-                match.player1Selection = objectId
-                try db.collection("games").document(docId).setData(from: match)
-                
-                let currentMatch = try await GKTurnBasedMatch.load(withID: match.matchId)
-                let nextParticipants = currentMatch.participants.filter({ $0.player?.gamePlayerID != GKLocalPlayer.local.gamePlayerID })
-                try await currentMatch.endTurn(
-                    withNextParticipants: nextParticipants,
-                    turnTimeout: 90 * 24 * 60 * 60,
-                    match: match.data())
+                try await endTurn(with: object)
             } else {
-                match.player2Selection = objectId
-                match.status = .ended
-                try db.collection("games").document(docId).setData(from: match)
-                
-                let currentMatch: GKTurnBasedMatch = try await GKTurnBasedMatch.load(withID: match.matchId)
-                let winner = try await match.determineWinner()
-                for participant in currentMatch.participants {
-                    guard let winner else {
-                        participant.matchOutcome = .tied
-                        continue
-                    }
-                    
-                    participant.matchOutcome = winner == participant.player?.gamePlayerID ? .won : .lost
-                }
-                try await currentMatch.endMatchInTurn(withMatch: match.data())
-                
-                if winner == nil {
-                    gameResult = .tied
-                } else {
-                    gameResult = winner == playerId ? .won : .lost
-                }
+                try await endGame(with: object)
             }
         } catch {
-            print("Error resolving turn \(error)")
+            Logger.log(error, message: "Error resolving turn")
+        }
+    }
+    
+    private func endTurn(with object: Object) async throws {
+        guard isCreator else {
+            Logger.log(MatchError.developerError, message: "endTurn should only be used by the game creator")
+            throw MatchError.developerError
+        }
+        
+        guard let docId = match.id, let objectId = object.id else {
+            Logger.log(MatchError.developerError, message: "Error resolving match or object id")
+            throw MatchError.developerError
+        }
+        
+        match.player1Selection = objectId
+        try db.collection("games").document(docId).setData(from: match)
+    }
+    
+    private func endGame(with object: Object) async throws {
+        guard !isCreator else {
+            Logger.log(MatchError.developerError, message: "endGame should only be used by player 2")
+            throw MatchError.developerError
+        }
+        
+        guard let docId = match.id, let objectId = object.id else {
+            Logger.log(MatchError.developerError, message: "Error resolving match or object id")
+            throw MatchError.developerError
+        }
+        
+        let winner = try await match.determineWinner()
+        match.player2Selection = objectId
+        match.status = .ended
+        match.winner = winner ?? ""
+        try db.collection("games").document(docId).setData(from: match)
+        
+        if winner == nil {
+            gameResult = .tied
+        } else {
+            gameResult = winner == playerId ? .won : .lost
         }
     }
 }

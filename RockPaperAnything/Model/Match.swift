@@ -13,6 +13,7 @@ enum MatchError: Error {
     case creationError
     case missingParticipants
     case notFinished
+    case developerError
 }
 
 extension GKTurnBasedMatch.Status: Codable { }
@@ -26,6 +27,8 @@ struct Match: Codable, Hashable, Identifiable {
     var participants: [String]
     var player1Selection: String
     var player2Selection: String
+    var winner: String
+    var flavorText: String
     
     init(playerId: String) {
         matchId = "non-gc-match"
@@ -34,6 +37,8 @@ struct Match: Codable, Hashable, Identifiable {
         participants = [playerId]
         player1Selection = ""
         player2Selection = ""
+        winner = ""
+        flavorText = ""
     }
     
     init() {
@@ -43,13 +48,15 @@ struct Match: Codable, Hashable, Identifiable {
         participants = []
         player1Selection = ""
         player2Selection = ""
-    }
-    
-    func data() throws -> Data {
-        return try MatchData(self).data()
+        winner = ""
+        flavorText = ""
     }
     
     func determineWinner() async throws -> String? {
+        if !winner.isEmpty, let winnerIndex = participants.firstIndex(of: winner) {
+            return participants[winnerIndex]
+        }
+        
         guard
             participants.count == 2,
             let player1 = participants.first,
