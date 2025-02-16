@@ -8,11 +8,13 @@
 import FirebaseFirestore
 import GameKit
 import SwiftUI
+import EventSource
 
 enum GameState {
     case makeSelection
     case selectionMade
     case resolvingGame
+    case tiebreaker
     case finishedGame
     
     func navTitle(result: GameResult?) -> String {
@@ -20,6 +22,7 @@ enum GameState {
         case .makeSelection: return "Choose your move"
         case .selectionMade: return "Waiting for opponent"
         case .resolvingGame: return "Finalizing match..."
+        case .tiebreaker: return "Breaking the tie..."
         case .finishedGame:
             guard let result else { return "Unknown result" }
             
@@ -56,9 +59,11 @@ struct ActiveGameView: View {
             case .selectionMade:
                 SelectionMadeView(viewModel.selectedObject, namespace: animationNamespace)
             case .resolvingGame:
-                ResolvingGameView(viewModel)
+                ProgressView()
+            case .tiebreaker:
+                TiebreakerView(viewModel: viewModel)
             case .finishedGame:
-                FinishedGameView(viewModel)
+                GameResultView(viewModel)
             }
         }
         .animation(.easeIn, value: viewModel.state)
@@ -153,19 +158,7 @@ struct SelectionMadeView: View {
     }
 }
 
-struct ResolvingGameView: View {
-    private var viewModel: ActiveGameViewModel
-    
-    init(_ viewModel: ActiveGameViewModel) {
-        self.viewModel = viewModel
-    }
-    
-    var body: some View {
-        ProgressView()
-    }
-}
-
-struct FinishedGameView: View {
+struct GameResultView: View {
     private var viewModel: ActiveGameViewModel
     
     init(_ viewModel: ActiveGameViewModel) {
@@ -174,10 +167,6 @@ struct FinishedGameView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Game Over")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
             HStack {
                 if let selectedObject = viewModel.selectedObject {
                     VStack {
@@ -207,16 +196,79 @@ struct FinishedGameView: View {
                 }
             }
             
-            Text(viewModel.resultText)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .padding(.top)
+            if !viewModel.match.flavorText.isEmpty {
+                Text(viewModel.match.flavorText)
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .background(Color(UIColor.systemBackground))
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+            }
         }
         .padding()
         .background(Color(UIColor.systemGray6))
         .cornerRadius(20)
         .shadow(radius: 10)
         .padding()
+    }
+}
+
+struct TiebreakerView: View {
+    let viewModel: ActiveGameViewModel
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            HStack {
+                if let selectedObject = viewModel.selectedObject {
+                    VStack {
+                        ObjectImageView(object: selectedObject)
+                            .frame(width: 100, height: 100)
+                            .shadow(radius: 10)
+                        
+                        Text("You")
+                            .font(.headline)
+                    }
+                }
+                
+                Text("VS")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.horizontal)
+                
+                if let opponentObject = viewModel.opponentObject {
+                    VStack {
+                        ObjectImageView(object: opponentObject)
+                            .frame(width: 100, height: 100)
+                            .shadow(radius: 10)
+                        
+                        Text("Opponent")
+                            .font(.headline)
+                    }
+                }
+            }
+            
+            if !viewModel.explanationDisplay.isEmpty {
+                Text(viewModel.explanationDisplay)
+                    .font(.body)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .background(Color(UIColor.systemBackground))
+                    .cornerRadius(10)
+                    .shadow(radius: 5)
+            } else {
+                ProgressView()
+                    .scaleEffect(1.5)
+            }
+        }
+        .padding()
+        .background(Color(UIColor.systemGray6))
+        .cornerRadius(20)
+        .shadow(radius: 10)
+        .padding()
+        .task {
+            await viewModel.startTiebreaker()
+        }
     }
 }
 

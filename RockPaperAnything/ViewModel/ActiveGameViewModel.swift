@@ -8,6 +8,7 @@
 import EventSource
 import GameKit
 import FirebaseFirestore
+import Foundation
 import SwiftUI
 
 @Observable
@@ -20,6 +21,16 @@ public class ActiveGameViewModel {
     var selectedObject: Object?
     var opponentObject: Object?
     var gameResult: GameResult?
+    var explanation: String = ""
+    
+    var explanationDisplay: String {
+        if !explanation.contains("|") { return "" }
+        else {
+            let splitSubstrings = explanation.split(separator: "|")
+            guard splitSubstrings.count == 2 else { return "" }
+            return String(splitSubstrings[1])
+        }
+    }
     
     var isCreator: Bool {
         playerId == match.participants.first
@@ -32,6 +43,8 @@ public class ActiveGameViewModel {
             return .selectionMade
         } else if gameResult == nil {
             return .resolvingGame
+        } else if gameResult == .tied && match.winner.isEmpty && match.player1Selection != match.player2Selection {
+            return .tiebreaker
         } else {
             return .finishedGame
         }
@@ -131,10 +144,14 @@ public class ActiveGameViewModel {
             throw MatchError.developerError
         }
         
-        let winner = try await match.determineWinner()
         match.player2Selection = objectId
-        match.status = .ended
-        match.winner = winner ?? ""
+        let winner = try await match.determineWinner()
+        
+        if winner != nil {
+            match.status = .ended
+            match.winner = winner ?? ""
+        }
+        
         try db.collection("games").document(docId).setData(from: match)
         
         if winner == nil {
@@ -144,27 +161,61 @@ public class ActiveGameViewModel {
         }
     }
     
-    private func tieBreaker() async throws {
-        guard let selectedObject, let opponentObject, gameResult == .tied else {
-            Logger.log(MatchError.developerError, message: "Invalid match state for tieBreaker: \(match)")
-            throw MatchError.developerError
-        }
+    func startTiebreaker() async {
+        guard let selectedObject = selectedObject,
+              let opponentObject = opponentObject else { return }
         
         let eventSource = EventSource()
         let urlRequest = Network.deepSeekRequest(for: selectedObject, vs: opponentObject)
         let dataTask = await eventSource.dataTask(for: urlRequest)
-
+        
         for await event in await dataTask.events() {
             switch event {
-            case .open:
-                print("Connection was opened.")
-            case .error(let error):
-                print("Received an error:", error.localizedDescription)
             case .event(let event):
-                print("Received an event", event.data ?? "")
+                if let data = event.data?.data(using: .utf8) {
+                    do {
+                        let chunk = try JSONDecoder().decode(ChatCompletionChunk.self, from: data)
+                        if let content = chunk.choices.first?.delta.content {
+                            explanation += content
+                        }
+                    } catch {
+                        print("Error decoding chunk: \(error)")
+                    }
+                }
+            case .error(let error):
+                print("Error: \(error)")
             case .closed:
-                print("Connection was closed.")
+                // Check if we have a complete response with a winner
+                if explanation.contains("|") {
+                    let parts = explanation.split(separator: "|")
+                    if parts.count == 2 {
+                        let winner = String(parts[0])
+                        if winner == selectedObject.name {
+                            resolveTiebreaker(winner: true, flavor: String(parts[1]))
+                        } else if winner == opponentObject.name {
+                            resolveTiebreaker(winner: false, flavor: String(parts[1]))
+                        }
+                    }
+                }
+            default:
+                break
             }
+        }
+    }
+    
+    func resolveTiebreaker(winner: Bool, flavor: String) {
+        if winner {
+            gameResult = .won
+        } else {
+            gameResult = .lost
+        }
+        
+        // Update the match in Firestore with the new winner
+        if let docId = match.id {
+            match.winner = winner ? playerId : (match.participants.first { $0 != playerId } ?? "")
+            match.flavorText = flavor
+            match.status = .ended
+            try? db.collection("games").document(docId).setData(from: match)
         }
     }
 }
