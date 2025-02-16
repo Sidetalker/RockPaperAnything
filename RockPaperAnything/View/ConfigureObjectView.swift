@@ -91,27 +91,27 @@ struct ConfigureObjectView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save") {
-                    defer { modalMode.wrappedValue = false }
-                    
-                    newObject.name = name
-                    newObject.wins = objects.enumerated().compactMap { index, object in
-                        if let id = object.id, objectStates[index] == .wins {
-                            return db.collection("objects").document(id)
-                        } else { return nil }
-                    }
-                    newObject.loses = objects.enumerated().compactMap { index, object in
-                        if let id = object.id, objectStates[index] == .loses {
-                            return db.collection("objects").document(id)
-                        } else { return nil }
-                    }
-                    
-                    objectStates.append(.ties)
-                    
-                    do {
-                        try db.collection("objects").addDocument(from: newObject)
-                    } catch {
-                        objectStates.removeLast()
-                        Logger.log(error, message: "Error adding new object")
+                    Task {
+                        newObject.name = name
+                        newObject.wins = objects.enumerated().compactMap { index, object in
+                            if let id = object.id, objectStates[index] == .wins {
+                                return db.collection("objects").document(id)
+                            } else { return nil }
+                        }
+                        newObject.loses = objects.enumerated().compactMap { index, object in
+                            if let id = object.id, objectStates[index] == .loses {
+                                return db.collection("objects").document(id)
+                            } else { return nil }
+                        }
+                        
+                        do {
+                            try await db.collection("objects").addDocument(from: newObject)
+                            // Add a small delay to allow Firestore to complete the operation
+                            try await Task.sleep(for: .milliseconds(100))
+                            modalMode.wrappedValue = false
+                        } catch {
+                            Logger.log(error, message: "Error adding new object")
+                        }
                     }
                 }.disabled(isSaveDisabled)
             }

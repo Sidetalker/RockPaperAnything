@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddNewObjectView: View {
+    @Environment(\.supportsImagePlayground) private var supportsImagePlayground
     @Environment(\.dismiss) var dismiss
     @Environment(\.objects) private var objects
     
@@ -32,39 +33,48 @@ struct AddNewObjectView: View {
                     .dynamicTypeSize(.large)
                 Spacer().frame(height: 30)
                 ZStack {
-                    AsyncImage(
-                        url: imageUrl,
-                        transaction: Transaction(animation: .easeInOut)
-                    ) { phase in
-                        switch phase {
-                        case .empty:
-                            Image(systemName: "photo.fill")
-                                .font(.system(size: 50, weight: .ultraLight))
-                                .imageScale(.large)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .scaledToFit()
-                        case .failure:
-                            Image(systemName: "wifi.slash")
-                                .font(.system(size: 50, weight: .ultraLight))
-                                .imageScale(.large)
-                        default:
-                            Text("Unknown phase")
-                                .multilineTextAlignment(.center)
+                    if let generatedImage = viewModel.generatedImage {
+                        Image(uiImage: generatedImage)
+                            .resizable()
+                            .scaledToFit()
+                            .brightness(isUploading ? -0.5 : 0)
+                            .frame(width: 250)
+                    } else {
+                        AsyncImage(
+                            url: imageUrl,
+                            transaction: Transaction(animation: .easeInOut)
+                        ) { phase in
+                            switch phase {
+                            case .empty:
+                                Image(systemName: "photo.fill")
+                                    .font(.system(size: 50, weight: .ultraLight))
+                                    .imageScale(.large)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                            case .failure:
+                                Image(systemName: "wifi.slash")
+                                    .font(.system(size: 50, weight: .ultraLight))
+                                    .imageScale(.large)
+                            default:
+                                Text("Unknown phase")
+                                    .multilineTextAlignment(.center)
+                            }
                         }
+                        .frame(width: 250)
+                        .brightness(isUploading ? -0.5 : 0)
                     }
-                    .brightness(isUploading ? -0.5 : 0)
-                    .frame(width: 250)
                     
-                    if
-                        let progress = viewModel.uploadProgress?.fractionCompleted,
-                        isUploading
-                    {
-                        ProgressView(value: progress) {
+                    if viewModel.isGeneratingImage {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .tint(.white)
+                    } else if isUploading {
+                        ProgressView(value: viewModel.uploadProgress?.fractionCompleted) {
                             Text("Uploading")
                         } currentValueLabel: {
-                            Text("\(Int(progress * 100))%")
+                            Text("\(Int((viewModel.uploadProgress?.fractionCompleted ?? 0) * 100))%")
                         }
                         .progressViewStyle(.circular)
                         .tint(.white)
@@ -73,10 +83,18 @@ struct AddNewObjectView: View {
                 TextField(
                     "Image Prompt",
                     text: $prompt
-                ).onSubmit {
+                )
+                .onSubmit {
                     viewModel.uploadProgress = nil
                     imageUrl = nil
-                    isImagePlaygroundPresented.toggle()
+                    
+                    if supportsImagePlayground {
+                        isImagePlaygroundPresented.toggle()
+                    } else {
+                        Task {
+                            await viewModel.generateImage(for: prompt)
+                        }
+                    }
                 }
                 .focused($isPromptFocused)
                 .submitLabel(.search)
@@ -84,14 +102,23 @@ struct AddNewObjectView: View {
                 .padding(.horizontal, 50)
                 .padding(.vertical, 30)
                 
-                if
-                    let imageUrl,
-                    viewModel.uploadProgress == nil
-                {
+                if let imageUrl, viewModel.uploadProgress == nil {
                     Button(action: {
                         Task {
                             do {
                                 self.newObject = try await viewModel.upload(file: imageUrl)
+                            } catch {
+                                Logger.log(error, message: "Upload error")
+                            }
+                        }
+                    }) {
+                        Label("Upload Image", systemImage: "icloud.and.arrow.up")
+                    }
+                } else if viewModel.generatedImage != nil, viewModel.uploadProgress == nil {
+                    Button(action: {
+                        Task {
+                            do {
+                                self.newObject = try await viewModel.uploadGeneratedImage()
                             } catch {
                                 Logger.log(error, message: "Upload error")
                             }

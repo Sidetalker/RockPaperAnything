@@ -5,6 +5,7 @@
 //  Created by Kevin Sullivan on 1/27/25.
 //
 
+import UIKit
 import Foundation
 
 class Network {
@@ -50,5 +51,43 @@ Rules:
         urlRequest.setValue("Bearer \(Secrets.deepseekApiKey)", forHTTPHeaderField: "Authorization")
         
         return urlRequest
+    }
+    
+    static func generateImage(for objectName: String) async -> UIImage? {
+        let imageGenUrl = URL(string: "https://api.getimg.ai/v1/flux-schnell/text-to-image")!
+        let prompt = 
+"""
+A highly detailed and slightly stylized yet realistic depiction of a \(objectName), blending clean, modern design with a subtle cartoonish aesthetic. 
+The object is centered on a softly lit background, with smooth lighting and gentle shadows to emphasize depth. 
+The background fits the vibe and theme of the featured objected but is slightly blurred, muted, and understated. 
+The style is sleek, polished, and vibrant, inspired by Apple's design language, but with a playful and slightly exaggerated touch. 
+Use creative and dynamic colors, textures, and shapes while maintaining a high-resolution, semi-realistic quality.
+"""
+        
+        let bodyJson: [String: Any] = [
+            "prompt": prompt
+        ]
+        
+        let bodyData = try? JSONSerialization.data(withJSONObject: bodyJson)
+        var urlRequest = URLRequest(url: imageGenUrl)
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = bodyData
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(Secrets.getimgApiKey)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: urlRequest)
+            guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let base64String = json["image"] as? String,
+                  let imageData = Data(base64Encoded: base64String) else {
+                return nil
+            }
+            
+            return UIImage(data: imageData)
+        } catch {
+            print("Error generating image: \(error)")
+            return nil
+        }
     }
 }
